@@ -1,0 +1,4 @@
+input::placeholder{
+    color: var(--placeholder-color);
+    opacity: 1; /* Ensures full opacity for placeholder text */
+}
