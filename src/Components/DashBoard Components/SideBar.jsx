@@ -5,8 +5,9 @@ const SideBar = () => {
 
   return (
     <div>
+      <h2 className="text-xl font-bold mb-4 text-center hover:underline underline-offset-7 ">Trending Posts</h2>
       {trendingPosts.map((post) => (
-        <div key={post.id} className="flex p-2 border-b border-gray-200">
+        <div key={post._id} className="flex p-2 border-b border-gray-200">
           <img
             src={post.image}
             alt={post.title}

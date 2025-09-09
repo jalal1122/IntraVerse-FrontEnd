@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Loader = () => {
   return (
     <StyledWrapper>
-      <div className="w-full h-[80vh] flex items-center justify-center">
+      <div className="w-full h-[80vh] flex items-center justify-center bg-gray-900">
         <div className="wrapper">
           <div className="circle" />
           <div className="circle" />
