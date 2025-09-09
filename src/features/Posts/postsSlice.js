@@ -46,6 +46,7 @@ const postsSlice = createSlice({
       })
       .addCase(getTrendingPosts.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isError = null;
         state.isSuccess = true;
         state.trendingPosts = action.payload;
       })
