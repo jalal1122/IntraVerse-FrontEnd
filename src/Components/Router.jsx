@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router";
 import Register from "../Pages/Register.jsx";
 import Login from "../Pages/Login.jsx";
 import Dashboard from "../Pages/Dashboard.jsx";
+import PostDetails from "../Pages/PostDetails";
 
 const Router = () => {
   return (
@@ -28,6 +29,16 @@ const Router = () => {
           element={
             <>
               <Login />
+            </>
+          }
+        />
+
+        {/* Route for Post Details */}
+        <Route
+          path="/post/:id"
+          element={
+            <>
+              <PostDetails />
             </>
           }
         />

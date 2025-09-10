@@ -6,8 +6,21 @@ const getTrendingPosts = async () => {
   return response.data;
 };
 
+// Get All posts from the backend
+const getAllPosts = async () => {
+  const response = await axios.get("/api/posts");
+  return response.data;
+};
+
+const getPostById = async (id) => {
+  const response = await axios.get(`/api/post/${id}`);
+  return response.data;
+};
+
 const postsService = {
   getTrendingPosts,
+  getAllPosts,
+  getPostById,
 };
 
 export default postsService;
