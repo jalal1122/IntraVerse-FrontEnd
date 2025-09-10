@@ -1,47 +1,53 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getTrendingPosts, reset } from "../../features/Posts/postsSlice.js";
+import {
+  getTrendingPosts,
+  trendingPostsReset,
+} from "../../features/Posts/postsSlice.js";
 import { useEffect } from "react";
 import Loader from "../Loader";
-import SideBar from "./SideBar";
+import { Link } from "react-router";
 
 const Hero = () => {
   // get the trending posts from the Redux store
-  const { trendingPosts, isLoading, isError, isSuccess } = useSelector(
-    (state) => state.posts
-  );
+  const {
+    trendingPosts,
+    trendingPostsIsLoading,
+    trendingPostsIsError,
+    trendingPostsIsSuccess,
+  } = useSelector((state) => state.posts);
 
   // get the colors from the redux store
-  const { textColor, bgColor, primaryColor } = useSelector(
-    (state) => state.color.colors
-  );
+  const { primaryColor } = useSelector((state) => state.color.colors);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(reset());
+    if (trendingPostsIsSuccess) {
+      dispatch(trendingPostsReset());
     }
 
     dispatch(getTrendingPosts());
   }, [dispatch]);
 
-  if (isLoading) {
+  if (trendingPostsIsLoading) {
     return <Loader />;
   }
 
-  if (isError) {
-    return <div>Error: {isError}</div>;
+  if (trendingPostsIsError) {
+    return <div>Error: {trendingPostsIsError}</div>;
   }
 
   return (
     <>
       {trendingPosts[2] && (
         <div className="w-full h-[400px] rounded-lg relative overflow-hidden">
-          <img
-            src={trendingPosts[2].image}
-            alt={trendingPosts[2].title}
-            className="w-full h-full object-cover object-center"
-          />
+          <Link to={`/post/${trendingPosts[2]._id}`}>
+            <img
+              src={trendingPosts[2].image}
+              alt={trendingPosts[2].title}
+              className="w-full h-full object-cover object-center"
+            />
+          </Link>
 
           <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-5">
             <h3
@@ -50,9 +56,11 @@ const Hero = () => {
             >
               Featured/{trendingPosts[2].category}
             </h3>
+            <Link to={`/post/${trendingPosts[2]._id}`}>
             <h2 className="text-3xl font-bold text-white">
               {trendingPosts[2].title}
             </h2>
+            </Link>
             <p className=" mt-2 ml-3 text-white">
               {trendingPosts[2].createdAt.split("T")[0]}
             </p>

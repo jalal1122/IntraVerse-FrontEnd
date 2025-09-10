@@ -1,23 +1,27 @@
-import Header from "../Components/Header/Header.jsx";
-import Hero from "../Components/DashBoard Components/Hero";
+import { useParams } from "react-router";
+import Header from "../Components/Header/Header";
 import { useSelector } from "react-redux";
+import Post from "../Components/Post Details Components/Post";
 import SideBar from "../Components/DashBoard Components/SideBar";
-import NewestPosts from "../Components/DashBoard Components/NewestPosts";
 
-const Dashboard = () => {
+const PostDetails = () => {
+  // get the id from the params
+  const { id } = useParams();
+
+  // get the text color from the redux store
   const { textColor } = useSelector((state) => state.color.colors);
 
   return (
-    <>
+    <div>
       <Header />
+
       <div
         className="w-[1200px] relative flex justify-between mx-auto my-10"
         style={{ color: textColor }}
       >
         {/* Main Content */}
         <div className=" w-[69%] h-full flex flex-col gap-5">
-          <Hero />
-          <NewestPosts />
+          <Post id={id} />
         </div>
 
         {/* Side Bar */}
@@ -26,8 +30,8 @@ const Dashboard = () => {
           <SideBar start={2} end={4} title={"Popular"} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Dashboard;
+export default PostDetails;

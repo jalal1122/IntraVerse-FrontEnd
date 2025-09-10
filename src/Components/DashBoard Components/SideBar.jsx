@@ -1,25 +1,26 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import SidePost from "../SidePost";
+import { useEffect } from "react";
+import { getTrendingPosts } from "../../features/Posts/postsSlice";
 
-const SideBar = () => {
+const SideBar = ({ start, end, title }) => {
   const { trendingPosts } = useSelector((state) => state.posts);
+
+  const dispatch = useDispatch();
+
+  // fetch the trending posts when the component mounts
+
+  useEffect(() => {
+    dispatch(getTrendingPosts());
+  }, [dispatch]);
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4 text-center hover:underline underline-offset-7 ">Trending Posts</h2>
-      {trendingPosts.map((post) => (
-        <div key={post._id} className="flex p-2 border-b border-gray-200">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-30 h-18 object-cover mr-2"
-          />
-          <div>
-            <h4 className="font-semibold">{post.title}</h4>
-            <p className="text-sm text-gray-600">
-              {post.createdAt.split("T")[0]}
-            </p>
-          </div>
-        </div>
+      <h2 className="text-xl font-bold mb-4 text-center hover:underline underline-offset-7 ">
+        {title} Posts
+      </h2>
+      {trendingPosts.slice(start, end).map((post) => (
+        <SidePost post={post} key={post._id} />
       ))}
     </div>
   );
