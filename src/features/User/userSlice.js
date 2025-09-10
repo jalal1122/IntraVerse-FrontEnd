@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { userService } from "./userService";
 
 const user = localStorage.getItem("user")
-  ? JSON.parse(localStorage.getItem("user"))
+  ? JSON.parse(document.cookie.get("user"))
   : null;
 
 // Register user
@@ -28,7 +28,10 @@ export const loginUser = createAsyncThunk(
   "user/login",
   async (userData, thunkApi) => {
     try {
-      return await userService.loginUser(userData);
+      const response = await userService.loginUser(userData);
+      console.log("Login response:", response.data);
+      
+      return response.data;
     } catch (error) {
       {
         const message =

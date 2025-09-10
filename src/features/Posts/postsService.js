@@ -20,13 +20,22 @@ const getPostById = async (id) => {
 const getPostComments = async (postId) => {
   const response = await axios.get(`/api/comments/${postId}`);
   return response.data;
-}
+};
+
+const addComment = async (commentData) => {
+  const response = await axios.post(`/api/comments/${commentData.postId}`, {
+    userName: commentData.username,
+    text: commentData.comment,
+  });
+  return response.data;
+};
 
 const postsService = {
   getTrendingPosts,
   getAllPosts,
+  addComment,
   getPostById,
-  getPostComments
+  getPostComments,
 };
 
 export default postsService;

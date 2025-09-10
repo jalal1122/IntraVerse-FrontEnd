@@ -29,7 +29,11 @@ const loginUser = async (userData) => {
   const response = await axios.post(`${API_URL}/login`, userData);
 
   if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data));
+    // localStorage.setItem("user", JSON.stringify(response.data.data));
+    document.cookie.set("user", JSON.stringify(response.data.data), {
+      expires: new Date(Date.now() + 86400000), // 1 day
+      path: "/",
+    });
   }
 
   return response.data;
@@ -40,7 +44,7 @@ const logoutUser = async () => {
   const response = await axios.get(`${API_URL}/logout`);
 
   if (response.data) {
-    localStorage.removeItem("user");
+    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }
 
   return response.data;
