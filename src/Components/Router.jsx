@@ -3,8 +3,10 @@ import Register from "../Pages/Register.jsx";
 import Login from "../Pages/Login.jsx";
 import Dashboard from "../Pages/Dashboard.jsx";
 import PostDetails from "../Pages/PostDetails";
+import { Navigate } from "react-router";
 
 const Router = () => {
+  const user = localStorage.getItem("user");
   return (
     <>
       <Routes>
@@ -42,6 +44,22 @@ const Router = () => {
             </>
           }
         />
+
+        {/*Route for MyBlogs */}
+        {user && (
+          <Route
+            path="/my-blogs"
+            element={
+              <>
+                {/* <MyBlogs /> */}
+                shdfhdsjhfj
+              </>
+            }
+          />
+        )}
+
+        {/* Redirect to Dashboard */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
