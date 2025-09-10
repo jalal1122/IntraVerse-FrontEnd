@@ -25,19 +25,19 @@ const Post = ({ id }) => {
   return (
     <div className="flex flex-col gap-2 p-3">
         {/* Category */}
-      <h2 className="font-bold uppercase" style={{ color: primaryColor }}>{post.category}</h2>
+      <h2 className="font-bold uppercase" style={{ color: primaryColor }}>{post?.category}</h2>
 
         {/* Title */}
-        <h1 className="text-3xl font-extrabold">{post.title}</h1>
+        <h1 className="text-3xl font-extrabold">{post?.title}</h1>
 
         {/* Date */}
-        <p className="text-sm text-gray-500">Published on: {new Date(post.createdAt).toLocaleDateString()}</p>
+        <p className="text-sm text-gray-500">Published on: {new Date(post?.createdAt).toLocaleDateString()}</p>
 
         {/* Image */}
-        <img src={post.image} alt={post.title} className="w-full h-auto rounded-lg" />
+        <img src={post?.image} alt={post?.title} className="w-full h-auto rounded-lg" />
 
         {/* Content */}
-        <p className="text-lg leading-relaxed">{post.content}</p>
+        <p className="text-lg leading-relaxed">{post?.content}</p>
     </div>
   );
 };

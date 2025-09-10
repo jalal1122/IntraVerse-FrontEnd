@@ -3,6 +3,7 @@ import Header from "../Components/Header/Header";
 import { useSelector } from "react-redux";
 import Post from "../Components/Post Details Components/Post";
 import SideBar from "../Components/DashBoard Components/SideBar";
+import Comments from "../Components/Post Details Components/Comments";
 
 const PostDetails = () => {
   // get the id from the params
@@ -28,6 +29,8 @@ const PostDetails = () => {
         <div className="w-[29%] h-[100%] rounded-lg flex flex-col gap-10">
           <SideBar start={0} end={2} title={"Trending"} />
           <SideBar start={2} end={4} title={"Popular"} />
+
+          <Comments />
         </div>
       </div>
     </div>

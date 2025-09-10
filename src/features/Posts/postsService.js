@@ -17,10 +17,16 @@ const getPostById = async (id) => {
   return response.data;
 };
 
+const getPostComments = async (postId) => {
+  const response = await axios.get(`/api/comments/${postId}`);
+  return response.data;
+}
+
 const postsService = {
   getTrendingPosts,
   getAllPosts,
   getPostById,
+  getPostComments
 };
 
 export default postsService;

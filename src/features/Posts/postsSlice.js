@@ -5,16 +5,40 @@ const initialState = {
   posts: [],
   trendingPosts: [],
   post: null,
+  postsComments: [],
   postIsLoading: false,
   postsIsLoading: false,
   trendingPostsIsLoading: false,
+  postsCommentsIsLoading: false,
   postsIsError: null,
   trendingPostsIsError: null,
   postIsError: null,
+  postsCommentsIsError: null,
   postsIsSuccess: false,
   trendingPostsIsSuccess: false,
   postIsSuccess: false,
+  postsCommentsIsSuccess: false,
 };
+
+// get Post Comments by Post Id
+export const getPostComments = createAsyncThunk(
+  "posts/getPostComments",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await postsService.getPostComments(postId);
+      
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Get Post by Id
 export const getPostById = createAsyncThunk(
@@ -60,7 +84,6 @@ export const getTrendingPosts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await postsService.getTrendingPosts();
-      console.log(response.data);
       return response.data;
     } catch (error) {
       const message =
@@ -87,6 +110,11 @@ const postsSlice = createSlice({
       state.trendingPostsIsLoading = false;
       state.trendingPostsIsError = null;
       state.trendingPostsIsSuccess = false;
+    },
+    postsReset: (state) => {
+      state.postsIsLoading = false;
+      state.postsIsError = null;
+      state.postsIsSuccess = false;
     },
   },
   extraReducers: (builder) => {
@@ -144,9 +172,30 @@ const postsSlice = createSlice({
         state.postIsLoading = false;
         state.postIsError = action.payload;
         state.postIsSuccess = false;
+      })
+
+      /////////////
+      // get post comments by post id
+      ////////////
+      .addCase(getPostComments.pending, (state) => {
+        state.postsCommentsIsLoading = true;
+        state.postsCommentsIsError = null;
+        state.postsCommentsIsSuccess = false;
+      })
+      .addCase(getPostComments.fulfilled, (state, action) => {
+        state.postsCommentsIsLoading = false;
+        state.postsCommentsIsError = null;
+        state.postsCommentsIsSuccess = true;
+        state.postsComments = action.payload;
+      })
+      .addCase(getPostComments.rejected, (state, action) => {
+        state.postsCommentsIsLoading = false;
+        state.postsCommentsIsError = action.payload;
+        state.postsCommentsIsSuccess = false;
       });
   },
 });
 
-export const { postsReset, trendingPostsReset } = postsSlice.actions;
+export const { postsReset, trendingPostsReset, postsCommentsReset } =
+  postsSlice.actions;
 export default postsSlice.reducer;
