@@ -6,19 +6,42 @@ const initialState = {
   trendingPosts: [],
   post: null,
   postsComments: [],
+  makeComment: null,
   postIsLoading: false,
   postsIsLoading: false,
   trendingPostsIsLoading: false,
   postsCommentsIsLoading: false,
+  makeCommentIsLoading: false,
   postsIsError: null,
   trendingPostsIsError: null,
   postIsError: null,
   postsCommentsIsError: null,
+  makeCommentIsError: null,
   postsIsSuccess: false,
   trendingPostsIsSuccess: false,
   postIsSuccess: false,
   postsCommentsIsSuccess: false,
+  makeCommentIsSuccess: false,
 };
+
+// Add a comment to a post
+export const addComment = createAsyncThunk(
+  "posts/addComment",
+  async (commentData, thunkAPI) => {
+    try {
+      const response = await postsService.addComment(commentData);
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // get Post Comments by Post Id
 export const getPostComments = createAsyncThunk(
@@ -26,7 +49,7 @@ export const getPostComments = createAsyncThunk(
   async (postId, thunkAPI) => {
     try {
       const response = await postsService.getPostComments(postId);
-      
+
       return response.data;
     } catch (error) {
       const message =

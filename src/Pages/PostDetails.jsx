@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Post from "../Components/Post Details Components/Post";
 import SideBar from "../Components/DashBoard Components/SideBar";
 import Comments from "../Components/Post Details Components/Comments";
+import MakeComments from "../Components/Post Details Components/MakeComments";
 
 const PostDetails = () => {
   // get the id from the params
@@ -23,6 +24,9 @@ const PostDetails = () => {
         {/* Main Content */}
         <div className=" w-[69%] h-full flex flex-col gap-5">
           <Post id={id} />
+
+          {/* Comments Section */}
+          <MakeComments />
         </div>
 
         {/* Side Bar */}
