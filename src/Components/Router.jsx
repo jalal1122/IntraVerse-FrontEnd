@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router";
-import Register from "../Pages/Register.jsx";
+// import Register from "../Pages/Register.jsx";
 import Login from "../Pages/Login.jsx";
 import Dashboard from "../Pages/Dashboard.jsx";
 import PostDetails from "../Pages/PostDetails";
 import { Navigate } from "react-router";
+import MyBlogs from "../Pages/MyBlogs";
 
 const Router = () => {
-  const user = localStorage.getItem("user");
+  const user = document.cookie.includes("user=");
   return (
     <>
       <Routes>
@@ -18,7 +19,7 @@ const Router = () => {
             </>
           }
         />
-        
+
         {/* <Route
           path="/register"
           element={
@@ -53,8 +54,7 @@ const Router = () => {
             path="/my-blogs"
             element={
               <>
-                {/* <MyBlogs /> */}
-                shdfhdsjhfj
+                <MyBlogs />
               </>
             }
           />
