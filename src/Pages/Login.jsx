@@ -4,7 +4,7 @@ import { MdLogin } from "react-icons/md";
 import { useEffect, useState } from "react";
 import "./placeholderColor.css";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { loginUser, reset } from "../features/User/userSlice";
+import { loginUser, loginReset } from "../features/User/userSlice";
 import { useNavigate } from "react-router";
 import Loader from "../Components/Loader";
 
@@ -33,32 +33,31 @@ const Login = () => {
     /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-z]).{8,}$/;
 
   // get the user state from Redux store
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.user
-  );
+  const { user, loginIsSuccess, loginIsError, loginMessage, loginIsLoading } =
+    useSelector((state) => state.user);
 
   // Effect to handle side effects based on user state
   useEffect(() => {
     // Set error message if there is an error
-    if (isError) {
-      setErrorMessage(message);
+    if (loginIsError) {
+      setErrorMessage(loginMessage);
     }
 
     // If login is successful or user is already logged in, navigate to dashboard
-    if (isSuccess || user) {
+    if (loginIsSuccess || user) {
       console.log("Login successful");
       // Navigate to dashboard or home page after successful login
       navigate("/");
     }
 
     // reset the user State
-    dispatch(reset());
+    // dispatch(loginReset());
 
     // Cleanup function to reset error message on component unmount
     return () => {
       setErrorMessage("");
     };
-  }, [isError, isSuccess, message, dispatch, user, navigate]);
+  }, [loginIsError, loginIsSuccess, loginMessage, dispatch, user, navigate]);
 
   // Handle input changes
   const onchange = (e) => {
@@ -84,7 +83,7 @@ const Login = () => {
 
   // if the user is loading, show the loader
   // Otherwise, render the login form
-  return isLoading ? (
+  return loginIsLoading ? (
     <Loader />
   ) : (
     <>

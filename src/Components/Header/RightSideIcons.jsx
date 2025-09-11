@@ -22,7 +22,7 @@ const RightSideIcons = () => {
   };
 
   // Check if user is logged in based on Redux state or localStorage
-  const isUserLoggedIn = user || localStorage.getItem("user");
+  const isUserLoggedIn = user || document.cookie.includes("user=");
 
   return (
     <div className="flex justify-between items-center gap-4">
@@ -59,20 +59,6 @@ const RightSideIcons = () => {
               }}
               aria-label="Login"
               title="Login"
-            />
-          </Link>
-
-          {/* Register Icon */}
-          <Link to="/register">
-            <FaUser
-              size={25}
-              className="hover:scale-110 transition-transform duration-300"
-              style={{
-                color: textColor,
-                cursor: "pointer",
-              }}
-              aria-label="Register"
-              title="Register"
             />
           </Link>
         </>

@@ -18,14 +18,16 @@ const Router = () => {
             </>
           }
         />
-        <Route
+        
+        {/* <Route
           path="/register"
           element={
             <>
               <Register />
             </>
           }
-        />
+        /> */}
+
         <Route
           path="/login"
           element={
