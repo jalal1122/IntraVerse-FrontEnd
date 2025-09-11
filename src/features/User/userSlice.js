@@ -5,14 +5,13 @@ const user = localStorage.getItem("user")
   ? JSON.parse(document.cookie.get("user"))
   : null;
 
-// Register user
-export const registerUser = createAsyncThunk(
-  "user/register",
-  async (userData, thunkApi) => {
+// refresh token
+export const refreshToken = createAsyncThunk(
+  "user/refreshToken",
+  async (_, thunkApi) => {
     try {
-      const result = await userService.RegisterUser(userData);
-
-      return result.data;
+      const response = await userService.refreshToken();
+      return response.data;
     } catch (error) {
       const message =
         (error.response &&
@@ -24,6 +23,26 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+// Register user
+// export const registerUser = createAsyncThunk(
+//   "user/register",
+//   async (userData, thunkApi) => {
+//     try {
+//       const result = await userService.RegisterUser(userData);
+
+//       return result.data;
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkApi.rejectWithValue(message);
+//     }
+//   }
+// );
 
 // Login User
 export const loginUser = createAsyncThunk(
@@ -68,14 +87,19 @@ export const logoutUser = createAsyncThunk(
 
 const initialState = {
   user: user,
+  refreshTokenResponse: null,
   isLoading: false,
   loginIsLoading: false,
+  refreshTokenIsLoading: false,
   isSuccess: false,
   loginIsSuccess: false,
+  refreshTokenIsSuccess: false,
   isError: false,
   loginIsError: false,
+  refreshTokenIsError: false,
   message: "",
   loginMessage: "",
+  refreshTokenMessage: "",
 };
 
 const userSlice = createSlice({
@@ -99,20 +123,20 @@ const userSlice = createSlice({
     builder
 
       // Handle register user actions
-      .addCase(registerUser.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.user = action.payload;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-        state.user = null;
-      })
+      // .addCase(registerUser.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(registerUser.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.isSuccess = true;
+      //   state.user = action.payload;
+      // })
+      // .addCase(registerUser.rejected, (state, action) => {
+      //   state.isLoading = false;
+      //   state.isError = true;
+      //   state.message = action.payload;
+      //   state.user = null;
+      // })
 
       // Handle login user actions
       .addCase(loginUser.pending, (state) => {
@@ -152,6 +176,23 @@ const userSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.user = null; // Ensure user is cleared on error
+      })
+
+      // Handle refresh token actions
+      .addCase(refreshToken.pending, (state) => {
+        state.refreshTokenIsLoading = true;
+      })
+      .addCase(refreshToken.fulfilled, (state, action) => {
+        state.refreshTokenIsLoading = false;
+        state.refreshTokenIsSuccess = true;
+        state.refreshTokenResponse = action.payload;
+      })
+      .addCase(refreshToken.rejected, (state, action) => {
+        state.refreshTokenIsLoading = false;
+        state.refreshTokenIsError = true;
+        state.refreshTokenMessage = action.payload;
+        state.refreshTokenResponse = null;
+        state.user = null; // Clear user data if refresh fails
       });
   },
 });

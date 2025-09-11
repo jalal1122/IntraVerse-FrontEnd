@@ -54,9 +54,15 @@ const logoutUser = async () => {
   return response.data;
 };
 
+const refreshToken = async () => {
+  const response = await axios.get(`${API_URL}/refresh-token`);
+  return response.data;
+}
+
 const userService = {
   RegisterUser,
   loginUser,
+  refreshToken,
   logoutUser,
 };
 

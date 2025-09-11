@@ -46,12 +46,16 @@ const Login = () => {
     // If login is successful or user is already logged in, navigate to dashboard
     if (loginIsSuccess || user) {
       console.log("Login successful");
+
+      dispatch(loginReset());
+      setErrorMessage("");
+
       // Navigate to dashboard or home page after successful login
       navigate("/");
     }
 
     // reset the user State
-    // dispatch(loginReset());
+    dispatch(loginReset());
 
     // Cleanup function to reset error message on component unmount
     return () => {

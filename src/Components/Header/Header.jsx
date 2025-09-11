@@ -47,7 +47,7 @@ const Header = () => {
                 cursor: "pointer",
               }}
             >
-              <Link to={"/myblogs"}>MyBlogs</Link>
+              <Link to={"/my-blogs"}>MyBlogs</Link>
             </li>
           </ul>
         </div>

@@ -1,9 +1,9 @@
 import "./App.css";
-import Dashboard from "./Pages/Dashboard";
 import { useSelector, useDispatch } from "react-redux";
 import { getMode } from "./features/Colors/colorSlice.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Router from "./Components/Router.jsx";
+import { refreshToken } from "./features/User/userSlice.js";
 
 function App() {
   // Initialize Redux dispatch and selectors
@@ -12,6 +12,8 @@ function App() {
   const bgColor = useSelector((state) => state.color.colors.bgColor);
   const textColor = useSelector((state) => state.color.colors.textColor);
   const mode = useSelector((state) => state.color.mode);
+
+  const { user } = useSelector((state) => state.user);
 
   // Effect to set the mode and colors based on localStorage
   // and update the Redux state accordingly
@@ -25,6 +27,16 @@ function App() {
       document.body.style.backgroundColor = bgColor;
     }
   }, [mode, dispatch, bgColor, textColor]);
+
+  const [isUserLoggedIn] = useState(
+    !!user || document.cookie.includes("user=")
+  );
+
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      dispatch(refreshToken());
+    }
+  }, [isUserLoggedIn, dispatch]);
 
   // Render the main application component
   return (
