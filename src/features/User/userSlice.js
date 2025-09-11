@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { userService } from "./userService";
+import userService from "./userService.js";
 
 const user = localStorage.getItem("user")
   ? JSON.parse(document.cookie.get("user"))
@@ -10,7 +10,9 @@ export const registerUser = createAsyncThunk(
   "user/register",
   async (userData, thunkApi) => {
     try {
-      return await userService.RegisterUser(userData);
+      const result = await userService.RegisterUser(userData);
+
+      return result.data;
     } catch (error) {
       const message =
         (error.response &&
@@ -29,8 +31,6 @@ export const loginUser = createAsyncThunk(
   async (userData, thunkApi) => {
     try {
       const response = await userService.loginUser(userData);
-      console.log("Login response:", response.data);
-      
       return response.data;
     } catch (error) {
       {
@@ -51,9 +51,7 @@ export const logoutUser = createAsyncThunk(
   "user/logout",
   async (_, thunkApi) => {
     try {
-      console.log("Attempting to logout user...");
       const result = await userService.logoutUser();
-      console.log("Logout successful:", result);
       return result;
     } catch (error) {
       console.error("Logout failed:", error);
@@ -71,9 +69,13 @@ export const logoutUser = createAsyncThunk(
 const initialState = {
   user: user,
   isLoading: false,
+  loginIsLoading: false,
   isSuccess: false,
+  loginIsSuccess: false,
   isError: false,
+  loginIsError: false,
   message: "",
+  loginMessage: "",
 };
 
 const userSlice = createSlice({
@@ -85,6 +87,12 @@ const userSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+    },
+    loginReset: (state) => {
+      state.loginIsLoading = false;
+      state.loginIsSuccess = false;
+      state.loginIsError = false;
+      state.loginMessage = "";
     },
   },
   extraReducers: (builder) => {
@@ -108,17 +116,22 @@ const userSlice = createSlice({
 
       // Handle login user actions
       .addCase(loginUser.pending, (state) => {
-        state.isLoading = true;
+        state.loginIsLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
+        console.log(
+          "Login fulfilled, updating state with user data",
+          action.payload
+        );
+
+        state.loginIsLoading = false;
+        state.loginIsSuccess = true;
         state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
+        state.loginIsLoading = false;
+        state.loginIsError = true;
+        state.loginMessage = action.payload;
         state.user = null;
       })
 
@@ -143,5 +156,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { reset } = userSlice.actions;
+export const { reset, loginReset } = userSlice.actions;
 export default userSlice.reducer;

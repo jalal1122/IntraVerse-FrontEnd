@@ -30,10 +30,14 @@ const loginUser = async (userData) => {
 
   if (response.data) {
     // localStorage.setItem("user", JSON.stringify(response.data.data));
-    document.cookie.set("user", JSON.stringify(response.data.data), {
-      expires: new Date(Date.now() + 86400000), // 1 day
-      path: "/",
-    });
+    // document.cookie.set("user", JSON.stringify(response.data.data), {
+    //   expires: new Date(Date.now() + 86400000), // 1 day
+    //   path: "/",
+    // });
+
+    document.cookie = `user=${JSON.stringify(
+      response.data.data
+    )}; path=/; max-age=86400`; // 1 day
   }
 
   return response.data;
@@ -50,8 +54,10 @@ const logoutUser = async () => {
   return response.data;
 };
 
-export const userService = {
+const userService = {
   RegisterUser,
   loginUser,
   logoutUser,
 };
+
+export default userService;
