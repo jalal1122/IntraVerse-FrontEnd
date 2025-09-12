@@ -39,12 +39,12 @@ const Hero = () => {
 
   return (
     <>
-      {trendingPosts[2] && (
+      {trendingPosts[0] && (
         <div className="w-full h-[400px] rounded-lg relative overflow-hidden">
-          <Link to={`/post/${trendingPosts[2]._id}`}>
+          <Link to={`/post/${trendingPosts[0]._id}`}>
             <img
-              src={trendingPosts[2].image}
-              alt={trendingPosts[2].title}
+              src={trendingPosts[0].image}
+              alt={trendingPosts[0].title}
               className="w-full h-full object-cover object-center"
             />
           </Link>
@@ -54,15 +54,15 @@ const Hero = () => {
               className="text-lg font-semibold  w-fit px-2 py-1"
               style={{ backgroundColor: primaryColor }}
             >
-              Featured/{trendingPosts[2].category}
+              Featured/{trendingPosts[0].category}
             </h3>
-            <Link to={`/post/${trendingPosts[2]._id}`}>
+            <Link to={`/post/${trendingPosts[0]._id}`}>
             <h2 className="text-3xl font-bold text-white">
-              {trendingPosts[2].title}
+              {trendingPosts[0].title}
             </h2>
             </Link>
             <p className=" mt-2 ml-3 text-white">
-              {trendingPosts[2].createdAt.split("T")[0]}
+              {trendingPosts[0].createdAt.split("T")[0]}
             </p>
           </div>
         </div>
