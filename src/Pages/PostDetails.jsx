@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
 import Header from "../Components/Header/Header";
 import { useSelector } from "react-redux";
-import Post from "../Components/Post Details Components/Post";
-import SideBar from "../Components/DashBoard Components/SideBar";
-import Comments from "../Components/Post Details Components/Comments";
-import MakeComments from "../Components/Post Details Components/MakeComments";
+import Post from "../Components/Post Details_Components/Post";
+import SideBar from "../Components/DashBoard_Components/SideBar";
+import Comments from "../Components/Post Details_Components/Comments";
+import MakeComments from "../Components/Post Details_Components/MakeComments";
 
 const PostDetails = () => {
   // get the id from the params

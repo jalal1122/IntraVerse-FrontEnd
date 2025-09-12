@@ -7,7 +7,7 @@ import {
   resetRefreshTrendingPosts,
 } from "../features/admin/adminSlice.js";
 import Loader from "../Components/Loader";
-import AdminPost from "../Components/MyBlogs Components/adminPost";
+import AdminPost from "../Components/MyBlogs_Components/adminPost";
 import { useNavigate } from "react-router";
 import { getTrendingPosts } from "../features/posts/postsSlice.js";
 

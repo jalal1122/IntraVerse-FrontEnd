@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getPostById } from "../../features/Posts/postsSlice";
+import { getPostById } from "../../features/Posts/postsSlice.js";
 import Loader from "../Loader";
 import { useEffect } from "react";
 
