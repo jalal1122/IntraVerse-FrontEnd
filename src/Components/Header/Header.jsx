@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import RightSideIcons from "./RightSideIcons";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router";
-import { preinitModule } from "react-dom";
 
 const Header = () => {
   // Initialize Redux dispatch and selectors

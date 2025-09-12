@@ -1,8 +1,8 @@
 import Header from "../Components/Header/Header.jsx";
-import Hero from "../Components/DashBoard Components/Hero";
+import Hero from "../Components/DashBoard_Components/Hero";
 import { useSelector } from "react-redux";
-import SideBar from "../Components/DashBoard Components/SideBar";
-import NewestPosts from "../Components/DashBoard Components/NewestPosts";
+import SideBar from "../Components/DashBoard_Components/SideBar";
+import NewestPosts from "../Components/DashBoard_Components/NewestPosts";
 
 const Dashboard = () => {
   const { textColor } = useSelector((state) => state.color.colors);
