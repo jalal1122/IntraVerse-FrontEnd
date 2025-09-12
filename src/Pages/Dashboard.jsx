@@ -22,8 +22,8 @@ const Dashboard = () => {
 
         {/* Side Bar */}
         <div className="w-[29%] h-[100%] rounded-lg flex flex-col gap-10">
-          <SideBar start={0} end={2} title={"Trending"} />
-          <SideBar start={2} end={4} title={"Popular"} />
+          <SideBar start={0} end={4} title={"Trending"} />
+          <SideBar start={4} end={8} title={"Popular"} />
         </div>
       </div>
     </>

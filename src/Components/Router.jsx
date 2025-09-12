@@ -5,6 +5,8 @@ import Dashboard from "../Pages/Dashboard.jsx";
 import PostDetails from "../Pages/PostDetails";
 import { Navigate } from "react-router";
 import MyBlogs from "../Pages/MyBlogs";
+import CreatePost from "../Components/MyBlogs Components/CreatePost";
+import EditPost from "./MyBlogs Components/EditPost";
 
 const Router = () => {
   const user = document.cookie.includes("user=");
@@ -59,6 +61,12 @@ const Router = () => {
             }
           />
         )}
+
+        {/* Route for Creating Blog */}
+        {user && <Route path="/create-blog" element={<CreatePost />} />}
+
+        {/* Route for Editing Blog */}
+        {user && <Route path="/edit-blog/:id" element={<EditPost />} />}
 
         {/* Redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" />} />

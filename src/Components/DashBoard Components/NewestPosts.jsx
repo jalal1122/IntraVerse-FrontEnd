@@ -45,35 +45,23 @@ const NewestPosts = () => {
       {!postsIsLoading && !postsIsError && posts.length > 0 && (
         <div className="flex justify-between p-2 gap-3 flex-wrap">
           {/* First Post */}
-          {firstPost && (
-            <MainPost post={firstPost} key={firstPost._id} />
-          )}
+          {firstPost && <MainPost post={firstPost} key={firstPost._id} />}
+
           {/* First Line Post Group */}
           <div className="flex flex-col gap-4 w-[48%]">
             {firstLinePostGroup.map((post) => (
               <SidePost post={post} key={post._id} />
             ))}
           </div>
+          
           {/* Second Line Post Group */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex flex-col gap-4 w-[48%]">
             {secondLinePostGroup.map((post) => (
-              <div key={post._id} className="border p-2">
-                <h4 className="font-medium">{post.title}</h4>
-                <p className="text-sm text-gray-600">
-                  {post.content.slice(0, 60)}...
-                </p>
-              </div>
+              <SidePost post={post} key={post._id} />
             ))}
           </div>
           {/* Eighth Post */}
-          {eightPost && (
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold mb-2">{eightPost.title}</h3>
-              <p className="text-sm text-gray-600">
-                {eightPost.content.slice(0, 100)}...
-              </p>
-            </div>
-          )}
+          {eightPost && <MainPost post={eightPost} key={eightPost._id} />}
         </div>
       )}
     </div>

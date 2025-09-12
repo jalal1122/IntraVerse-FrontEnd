@@ -7,7 +7,7 @@ const SidePost = ({ post }) => {
         <img
           src={post.image}
           alt={post.title}
-          className="w-30 h-18 object-cover mr-2 hover:scale-105 transition-transform duration-300 hover:cursor-pointer"
+          className="w-30 h-auto object-cover object-center mr-2 hover:scale-105 transition-transform duration-300 hover:cursor-pointer"
         />
       </Link>
       <div>
