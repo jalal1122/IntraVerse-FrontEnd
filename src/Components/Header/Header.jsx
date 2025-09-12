@@ -2,11 +2,13 @@ import { useSelector } from "react-redux";
 import RightSideIcons from "./RightSideIcons";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router";
+import { preinitModule } from "react-dom";
 
 const Header = () => {
   // Initialize Redux dispatch and selectors
   // to access color state and mode
-  const textColor = useSelector((state) => state.color.colors.textColor);
+
+  const {primaryColor, textColor} = useSelector((state) => state.color.colors);
 
   // render the header component
   return (
@@ -26,7 +28,16 @@ const Header = () => {
               cursor: "pointer",
             }}
           >
-            <Link to={"/"}>Blogify</Link>
+            <Link to={"/"}>
+              Intra
+              <span
+                style={{
+                  color: primaryColor,
+                }}
+              >
+                Verse
+              </span>
+            </Link>
           </h1>
         </div>
 

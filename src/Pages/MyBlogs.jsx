@@ -1,22 +1,45 @@
 import { useEffect } from "react";
 import Header from "../Components/Header/Header";
 import { useSelector, useDispatch } from "react-redux";
-import { getAdminPosts } from "../features/admin/adminSlice.js";
+import {
+  getAdminPosts,
+  refreshTrendingPosts,
+  resetRefreshTrendingPosts,
+} from "../features/admin/adminSlice.js";
 import Loader from "../Components/Loader";
 import AdminPost from "../Components/MyBlogs Components/adminPost";
+import { useNavigate } from "react-router";
+import { getTrendingPosts } from "../features/posts/postsSlice.js";
 
 const MyBlogs = () => {
   const { textColor, primaryColor } = useSelector(
     (state) => state.color.colors
   );
+
   const dispatch = useDispatch();
 
-  const { adminPosts, adminIsLoading, adminIsSuccess, adminIsError } =
-    useSelector((state) => state.admin);
+  const navigate = useNavigate();
+
+  const {
+    adminPosts,
+    adminIsLoading,
+    adminIsSuccess,
+    adminIsError,
+    refreshTrendingPostsLoading,
+    refreshTrendingPostsSuccess,
+  } = useSelector((state) => state.admin);
 
   useEffect(() => {
     dispatch(getAdminPosts());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (refreshTrendingPostsSuccess) {
+      dispatch(getTrendingPosts());
+      dispatch(resetRefreshTrendingPosts());
+      navigate("/");
+    }
+  }, [refreshTrendingPostsSuccess]);
 
   if (adminIsLoading) {
     return <Loader />;
@@ -37,21 +60,41 @@ const MyBlogs = () => {
         <div className="flex justify-between mx-5 items-center">
           <h1 className="text-3xl font-bold">My Blogs</h1>
 
-          <button
-            className="px-4 py-2 rounded hover:scale-95 transition-all duration-300 active:scale-105 hover:cursor-pointer"
-            style={{
-              backgroundColor: primaryColor,
-            }}
-          >
-            Create Blog
-          </button>
+          <div className="flex gap-3">
+            {/* Refresh Trending List */}
+            <button
+              className="px-4 py-2 rounded hover:scale-95 transition-all duration-300 active:scale-105 hover:cursor-pointer"
+              style={{
+                backgroundColor: primaryColor,
+              }}
+              disabled={refreshTrendingPostsLoading}
+              onClick={() => dispatch(refreshTrendingPosts())}
+            >
+              Refresh Trending List
+            </button>
+
+            {/* Create Post */}
+            <button
+              className="px-4 py-2 rounded hover:scale-95 transition-all duration-300 active:scale-105 hover:cursor-pointer"
+              style={{
+                backgroundColor: primaryColor,
+              }}
+              onClick={() => navigate("/create-blog")}
+            >
+              Create Blog
+            </button>
+          </div>
         </div>
         {adminIsSuccess && adminPosts.length === 0 ? (
           <h1 className="text-3xl font-bold text-center">No Blogs Found</h1>
         ) : (
           <div className="flex flex-wrap gap-3 p-2">
             {adminPosts.map((post) => (
-              <AdminPost post={post} key={post._id} primaryColor={primaryColor} />
+              <AdminPost
+                post={post}
+                key={post._id}
+                primaryColor={primaryColor}
+              />
             ))}
           </div>
         )}
