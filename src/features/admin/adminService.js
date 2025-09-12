@@ -14,11 +14,7 @@ const createPost = async (postData) => {
     formData.append("image", postData.image);
   }
 
-  const response = await axios.post("/api/post", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const response = await axios.post("/api/post", formData);
   return response.data;
 };
 
@@ -36,11 +32,7 @@ const updatePost = async (postData) => {
   formData.append("category", category);
   formData.append("image", image);
 
-  const response = await axios.put(`/api/post/${postData.id}`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const response = await axios.put(`/api/post/${postData.id}`, formData);
   return response.data;
 };
 
