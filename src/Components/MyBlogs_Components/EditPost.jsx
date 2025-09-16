@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getEditPost, updatePost } from "../../features/admin/adminSlice.js";
 import selectCategories from "../../utils/blogCategories.js";
 import Loader from "../Loader";
+import BlogEditor from "./BlogEditor";
 
 const EditPost = () => {
   const { id } = useParams();
@@ -67,6 +68,13 @@ const EditPost = () => {
     };
 
     dispatch(updatePost(updatedPostData));
+  };
+
+  const handleSave = async (data) => {
+    setPostData((prevState) => ({
+      ...prevState,
+      content: data,
+    }));
   };
 
   // Call for edit post data
@@ -152,13 +160,15 @@ const EditPost = () => {
               />
 
               {/* Content */}
-              <textarea
+              <BlogEditor onSave={handleSave} initialData={postData.content} />
+
+              {/* <textarea
                 name="content"
                 value={postData.content}
                 onChange={handleOnChange}
                 placeholder="Content"
                 className="border border-gray-300 p-2 rounded"
-              ></textarea>
+              ></textarea> */}
 
               {/* Categories Select */}
               <select
