@@ -1,8 +1,7 @@
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-const BlogEditor = ({ onSave }) => {
-
+const BlogEditor = ({ onSave, initialData }) => {
   const handleSave = (data) => {
     onSave(data);
   };
@@ -11,7 +10,7 @@ const BlogEditor = ({ onSave }) => {
     <div className="text-black">
       <CKEditor
         editor={ClassicEditor}
-        data="<p>Start writing your blog...</p>"
+        data={initialData || ""}
         onChange={(_, editor) => {
           handleSave(editor.getData());
         }}
