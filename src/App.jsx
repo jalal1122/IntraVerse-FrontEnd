@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getMode } from "./features/Colors/colorSlice.js";
 import { useEffect, useState } from "react";
 import Router from "./Components/Router.jsx";
-import { refreshToken } from "./features/User/userSlice.js";
 
 function App() {
   // Initialize Redux dispatch and selectors
@@ -27,16 +26,6 @@ function App() {
       document.body.style.backgroundColor = bgColor;
     }
   }, [mode, dispatch, bgColor, textColor]);
-
-  const [isUserLoggedIn] = useState(
-    !!user || document.cookie.includes("user=")
-  );
-
-  useEffect(() => {
-    if (isUserLoggedIn) {
-      dispatch(refreshToken());
-    }
-  }, [isUserLoggedIn, dispatch]);
 
   // Render the main application component
   return (

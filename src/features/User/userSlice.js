@@ -2,27 +2,31 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService.js";
 
 const user = localStorage.getItem("user")
-  ? JSON.parse(document.cookie.get("user"))
+  ? JSON.parse(
+      document.cookie.includes("user=")
+        ? decodeURIComponent(document.cookie.split("user=")[1].split(";")[0])
+        : localStorage.getItem("user")
+    )
   : null;
 
 // refresh token
-export const refreshToken = createAsyncThunk(
-  "user/refreshToken",
-  async (_, thunkApi) => {
-    try {
-      const response = await userService.refreshToken();
-      return response.data;
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkApi.rejectWithValue(message);
-    }
-  }
-);
+// export const refreshToken = createAsyncThunk(
+//   "user/refreshToken",
+//   async (_, thunkApi) => {
+//     try {
+//       const response = await userService.refreshToken();
+//       return response.data;
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkApi.rejectWithValue(message);
+//     }
+//   }
+// );
 
 // Register user
 // export const registerUser = createAsyncThunk(
@@ -176,24 +180,24 @@ const userSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.user = null; // Ensure user is cleared on error
-      })
-
-      // Handle refresh token actions
-      .addCase(refreshToken.pending, (state) => {
-        state.refreshTokenIsLoading = true;
-      })
-      .addCase(refreshToken.fulfilled, (state, action) => {
-        state.refreshTokenIsLoading = false;
-        state.refreshTokenIsSuccess = true;
-        state.refreshTokenResponse = action.payload;
-      })
-      .addCase(refreshToken.rejected, (state, action) => {
-        state.refreshTokenIsLoading = false;
-        state.refreshTokenIsError = true;
-        state.refreshTokenMessage = action.payload;
-        state.refreshTokenResponse = null;
-        state.user = null; // Clear user data if refresh fails
       });
+
+    // Handle refresh token actions
+    // .addCase(refreshToken.pending, (state) => {
+    //   state.refreshTokenIsLoading = true;
+    // })
+    // .addCase(refreshToken.fulfilled, (state, action) => {
+    //   state.refreshTokenIsLoading = false;
+    //   state.refreshTokenIsSuccess = true;
+    //   state.refreshTokenResponse = action.payload;
+    // })
+    // .addCase(refreshToken.rejected, (state, action) => {
+    //   state.refreshTokenIsLoading = false;
+    //   state.refreshTokenIsError = true;
+    //   state.refreshTokenMessage = action.payload;
+    //   state.refreshTokenResponse = null;
+    //   state.user = null; // Clear user data if refresh fails
+    // });
   },
 });
 

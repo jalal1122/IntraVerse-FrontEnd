@@ -37,7 +37,7 @@ const loginUser = async (userData) => {
 
     document.cookie = `user=${JSON.stringify(
       response.data.data
-    )}; path=/; max-age=86400`; // 1 day
+    )}; path=/; max-age=31536000`; // for 1 year
   }
 
   return response.data;
@@ -54,15 +54,15 @@ const logoutUser = async () => {
   return response.data;
 };
 
-const refreshToken = async () => {
-  const response = await axios.get(`${API_URL}/refresh-token`);
-  return response.data;
-}
+// const refreshToken = async () => {
+//   const response = await axios.get(`${API_URL}/refresh-token`);
+//   return response.data;
+// }
 
 const userService = {
   RegisterUser,
   loginUser,
-  refreshToken,
+  // refreshToken,
   logoutUser,
 };
 

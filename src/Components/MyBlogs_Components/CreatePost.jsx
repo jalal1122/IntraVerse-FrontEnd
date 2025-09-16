@@ -5,6 +5,8 @@ import Loader from "../Loader";
 import { useNavigate } from "react-router";
 import Header from "../Header/Header";
 import selectCategories from "../../utils/blogCategories.js";
+import BlogEditor from "./BlogEditor";
+import BlogViewer from "./BlogViewer.jsx";
 
 const CreatePost = () => {
   const { textColor, primaryColor } = useSelector(
@@ -73,6 +75,13 @@ const CreatePost = () => {
     dispatch(createPost(postData));
   };
 
+  const handleSave = async (data) => {
+    setPostData((prevState) => ({
+      ...prevState,
+      content: data,
+    }));
+  };
+
   useEffect(() => {
     if (createPostSuccess) {
       navigate("/my-blogs");
@@ -126,15 +135,20 @@ const CreatePost = () => {
               onChange={(e) => handleOnChange(e)}
               className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <textarea
+
+            <BlogEditor onSave={handleSave} />
+
+            <BlogViewer content={postData.content} />
+
+            {/* <textarea
               name="content"
               placeholder="Content"
               value={postData.content}
               onChange={(e) => handleOnChange(e)}
               className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-40"
-            ></textarea>
+            ></textarea> */}
 
-{/* Categories Select */}
+            {/* Categories Select */}
             <select
               name="category"
               value={postData.category}
@@ -143,7 +157,11 @@ const CreatePost = () => {
             >
               <option value="">Select Category</option>
               {selectCategories.map((category) => (
-                <option value={category} key={category} style={{ color: "white", backgroundColor: "black" }}>
+                <option
+                  value={category}
+                  key={category}
+                  style={{ color: "white", backgroundColor: "black" }}
+                >
                   {category}
                 </option>
               ))}
