@@ -18,11 +18,11 @@ const PostDetails = () => {
       <Header />
 
       <div
-        className="w-[1200px] relative flex justify-between mx-auto my-10"
+        className="w-full xl:w-[1200px] relative flex flex-col lg:flex-row justify-between mx-auto my-10"
         style={{ color: textColor }}
       >
         {/* Main Content */}
-        <div className=" w-[69%] h-full flex flex-col gap-5">
+        <div className="w-full lg:w-[69%] h-full flex flex-col gap-5 p-5">
           <Post id={id} />
 
           {/* Comments Section */}
@@ -30,7 +30,7 @@ const PostDetails = () => {
         </div>
 
         {/* Side Bar */}
-        <div className="w-[29%] h-[100%] rounded-lg flex flex-col gap-10">
+        <div className="w-full lg:w-[29%] h-[100%] rounded-lg flex flex-row lg:flex-col flex-wrap justify-center gap-10 p-5">
           <SideBar start={0} end={2} title={"Trending"} />
           <SideBar start={2} end={4} title={"Popular"} />
 

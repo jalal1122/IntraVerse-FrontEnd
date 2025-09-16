@@ -167,18 +167,31 @@ const adminSlice = createSlice({
       state.adminPostsError = null;
       state.adminPostsSuccess = false;
     },
+    resetCreatePost: (state) => {
+      state.createPostLoading = false;
+      state.createPostError = null;
+      state.createPostSuccess = false;
+    },
+    resetEditPost: (state) => {
+      state.editPostLoading = false;
+      state.editPostError = null;
+      state.editPostSuccess = false;
+    },
+    resetUpdatePost: (state) => {
+      state.updatePostLoading = false;
+      state.updatePostError = null;
+      state.updatePostSuccess = false;
+    },
     resetDeletePost: (state) => {
       state.deletePostLoading = false;
       state.deletePostError = null;
       state.deletePostSuccess = false;
-      state.deletePost = null;
     },
     resetRefreshTrendingPosts: (state) => {
       state.refreshTrendingPostsLoading = false;
       state.refreshTrendingPostsError = null;
       state.refreshTrendingPostsSuccess = false;
-      state.refreshTrendingPosts = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -283,6 +296,13 @@ const adminSlice = createSlice({
   },
 });
 
-export const { resetAdminPosts, resetDeletePost, resetRefreshTrendingPosts } = adminSlice.actions;
+export const {
+  resetAdminPosts,
+  resetCreatePost,
+  resetDeletePost,
+  resetEditPost,
+  resetRefreshTrendingPosts,
+  resetUpdatePost,
+} = adminSlice.actions;
 
 export default adminSlice.reducer;

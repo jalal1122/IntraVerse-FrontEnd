@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../../features/admin/adminSlice";
+import { createPost, resetCreatePost } from "../../features/admin/adminSlice";
 import Loader from "../Loader";
 import { useNavigate } from "react-router";
 import Header from "../Header/Header";
@@ -84,6 +84,7 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (createPostSuccess) {
+      dispatch(resetCreatePost());
       navigate("/my-blogs");
     }
   }, [createPostSuccess]);
