@@ -12,6 +12,8 @@ const Post = ({ id }) => {
     (state) => state.posts
   );
 
+  document.title = post?.title + " - IntraVerse";
+
   useEffect(() => {
     dispatch(getPostById(id));
   }, [dispatch, id]);

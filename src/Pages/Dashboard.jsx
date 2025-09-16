@@ -7,6 +7,8 @@ import NewestPosts from "../Components/DashBoard_Components/NewestPosts";
 const Dashboard = () => {
   const { textColor } = useSelector((state) => state.color.colors);
 
+  document.title = "IntraVerse - Home";
+
   return (
     <>
       <Header />

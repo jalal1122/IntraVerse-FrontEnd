@@ -7,6 +7,8 @@ import Comments from "../Components/Post Details_Components/Comments";
 import MakeComments from "../Components/Post Details_Components/MakeComments";
 
 const PostDetails = () => {
+  
+
   // get the id from the params
   const { id } = useParams();
 
