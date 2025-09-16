@@ -7,12 +7,17 @@ const SidePost = ({ post }) => {
         <img
           src={post.image}
           alt={post.title}
-          className="w-30 h-auto object-cover object-center mr-2 hover:scale-105 transition-transform duration-300 hover:cursor-pointer"
+          className="max-w-30 h-auto object-cover object-center mr-2 hover:scale-105 transition-transform duration-300 hover:cursor-pointer"
         />
       </Link>
       <div>
         <Link to={`/post/${post._id}`}>
-          <h4 className="font-semibold hover:underline underline-offset-4">{post.title}</h4>
+          <h4
+            title={post.title}
+            className="font-semibold hover:underline underline-offset-4"
+          >
+            {post.title.slice(0, 40)}...
+          </h4>
         </Link>
         <p className="text-sm text-gray-600">{post.createdAt.split("T")[0]}</p>
       </div>

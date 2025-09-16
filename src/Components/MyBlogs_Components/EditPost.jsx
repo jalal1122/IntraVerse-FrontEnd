@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import Header from "../Header/Header";
 import { useEffect, useState } from "react";
-import { getEditPost, updatePost } from "../../features/admin/adminSlice.js";
+import { getEditPost, updatePost, resetEditPost, resetUpdatePost } from "../../features/admin/adminSlice.js";
 import selectCategories from "../../utils/blogCategories.js";
 import Loader from "../Loader";
 import BlogEditor from "./BlogEditor";
@@ -100,6 +100,8 @@ const EditPost = () => {
   //   when update post is successful
   useEffect(() => {
     if (updatePostSuccess) {
+      dispatch(resetEditPost());
+      dispatch(resetUpdatePost());
       navigate("/my-blogs");
     }
   }, [updatePostSuccess]);

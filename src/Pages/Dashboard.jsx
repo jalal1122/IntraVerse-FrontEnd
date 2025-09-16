@@ -11,17 +11,17 @@ const Dashboard = () => {
     <>
       <Header />
       <div
-        className="w-[1200px] relative flex justify-between mx-auto my-10"
+        className="w-[100%] lg:p-0 xl:w-[1200px] relative flex flex-col lg:flex-row justify-between mx-auto my-10"
         style={{ color: textColor }}
       >
         {/* Main Content */}
-        <div className=" w-[69%] h-full flex flex-col gap-5">
+        <div className="w-full lg:w-[69%] h-full flex flex-col gap-5 p-5">
           <Hero />
           <NewestPosts />
         </div>
 
         {/* Side Bar */}
-        <div className="w-[29%] h-[100%] rounded-lg flex flex-col gap-10">
+        <div className="w-full lg:w-[29%] h-[100%] rounded-lg flex flex-row lg:flex-col gap-10 p-5">
           <SideBar start={0} end={4} title={"Trending"} />
           <SideBar start={4} end={8} title={"Popular"} />
         </div>

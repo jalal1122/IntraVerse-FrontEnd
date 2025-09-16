@@ -40,7 +40,7 @@ const Hero = () => {
   return (
     <>
       {trendingPosts[0] && (
-        <div className="w-full h-[400px] rounded-lg relative overflow-hidden">
+        <div className="w-[100%] h-[400px] rounded-lg relative overflow-hidden">
           <Link to={`/post/${trendingPosts[0]._id}`}>
             <img
               src={trendingPosts[0].image}
