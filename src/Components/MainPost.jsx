@@ -15,14 +15,14 @@ const MainPost = ({ post }) => {
           title={post.title}
           className="text-lg font-semibold mb-1 hover:underline underline-offset-4"
         >
-          {post.title.slice(0, 40)}...
+          {post.title}
         </h3>
       </Link>
       <h4>{post.createdAt.split("T")[0]}</h4>
-      <p
+      {/* <p
         className="text-lg text-gray-600"
         dangerouslySetInnerHTML={{ __html: post.content.slice(0, 90) }}
-      ></p>
+      ></p> */}
     </div>
   );
 };

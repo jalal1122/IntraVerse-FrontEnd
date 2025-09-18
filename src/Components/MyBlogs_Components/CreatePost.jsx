@@ -139,8 +139,6 @@ const CreatePost = () => {
 
             <BlogEditor onSave={handleSave} />
 
-            <BlogViewer content={postData.content} />
-
             {/* <textarea
               name="content"
               placeholder="Content"

@@ -21,3 +21,8 @@ p h4{
     font-weight: bold;
     margin-bottom: 1rem;
 }
+
+p img{
+    width: 20px;
+    display: inline;
+}

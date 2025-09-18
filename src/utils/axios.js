@@ -24,9 +24,18 @@ axios.interceptors.response.use(
         const response = await axios.get("/api/user/refresh-token");
         if (response.status === 200) {
           console.log("Token refreshed successfully");
+        } else {
+          document.cookie =
+            "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          localStorage.removeItem("user");
+          window.location.href = "/login";
         }
         return axios(originalRequest);
       } catch (err) {
+        document.cookie =
+          "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        localStorage.removeItem("user");
+        window.location.href = "/login";
         return Promise.reject(err);
       }
     }

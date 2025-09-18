@@ -1,5 +1,6 @@
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import "./content.css";
 
 const BlogEditor = ({ onSave, initialData }) => {
   const handleSave = (data) => {
@@ -7,7 +8,7 @@ const BlogEditor = ({ onSave, initialData }) => {
   };
 
   return (
-    <div className="text-black">
+    <div className="ckEditor text-black">
       <CKEditor
         editor={ClassicEditor}
         data={initialData || ""}

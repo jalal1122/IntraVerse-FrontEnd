@@ -1,0 +1,28 @@
+.ck-content h1 {
+  font-size: 2rem !important;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.ck-content h2 {
+  font-size: 1.5rem !important;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.ckEditor h3 {
+  font-size: 1.17rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.ckEditor h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.ckEditor img {
+  width: 20px;
+  display: inline;
+}
