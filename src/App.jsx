@@ -1,8 +1,9 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getMode } from "./features/Colors/colorSlice.js";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Router from "./Components/Router.jsx";
+import { HeadProvider } from "react-head";
 
 function App() {
   // Initialize Redux dispatch and selectors
@@ -11,8 +12,6 @@ function App() {
   const bgColor = useSelector((state) => state.color.colors.bgColor);
   const textColor = useSelector((state) => state.color.colors.textColor);
   const mode = useSelector((state) => state.color.mode);
-
-  const { user } = useSelector((state) => state.user);
 
   // Effect to set the mode and colors based on localStorage
   // and update the Redux state accordingly
@@ -30,7 +29,9 @@ function App() {
   // Render the main application component
   return (
     <>
-      <Router />
+      <HeadProvider>
+        <Router />
+      </HeadProvider>
     </>
   );
 }

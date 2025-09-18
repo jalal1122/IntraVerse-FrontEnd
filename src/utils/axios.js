@@ -14,12 +14,16 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    error.timeout = 10000; // 10 seconds timeout
+
+    // If the error is due to an expired token, attempt to refresh it
     if (
       error.response &&
       error.response.status === 401 &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
+      originalRequest.withCredentials = true;
       try {
         const response = await axios.get("/api/user/refresh-token");
         if (response.status === 200) {
