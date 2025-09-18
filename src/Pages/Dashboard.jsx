@@ -3,14 +3,18 @@ import Hero from "../Components/DashBoard_Components/Hero";
 import { useSelector } from "react-redux";
 import SideBar from "../Components/DashBoard_Components/SideBar";
 import NewestPosts from "../Components/DashBoard_Components/NewestPosts";
+import SEO from "../Components/SEO";
 
 const Dashboard = () => {
   const { textColor } = useSelector((state) => state.color.colors);
 
-  document.title = "IntraVerse - Home";
-
   return (
     <>
+      <SEO
+        title="IntraVerse - Dashboard"
+        description="Welcome to IntraVerse, your go-to platform for the latest articles and insights. Explore trending and popular posts, and stay updated with the newest content."
+        keywords="IntraVerse, articles, trending posts, popular posts, latest insights, blog, news"
+      />
       <Header />
       <div
         className="w-[100%] lg:p-0 xl:w-[1200px] relative flex flex-col lg:flex-row justify-between mx-auto my-10"

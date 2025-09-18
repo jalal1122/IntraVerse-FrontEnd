@@ -7,8 +7,11 @@ import { Navigate } from "react-router";
 import MyBlogs from "../Pages/MyBlogs";
 import CreatePost from "../Components/MyBlogs_Components/CreatePost";
 import EditPost from "./MyBlogs_Components/EditPost";
+import { useDispatch } from "react-redux";
+import { getPostById } from "../features/Posts/postsSlice.js";
 
 const Router = () => {
+  const dispatch = useDispatch();
   const user = document.cookie.includes("user=");
   return (
     <>
@@ -43,6 +46,9 @@ const Router = () => {
         {/* Route for Post Details */}
         <Route
           path="/post/:id"
+          loader={({ params }) => {
+            dispatch(getPostById(params.id));
+          }}
           element={
             <>
               <PostDetails />
