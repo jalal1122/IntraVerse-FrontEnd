@@ -35,27 +35,27 @@ const NewestPosts = () => {
   }, [dispatch, posts]);
 
   return (
-    <div className="">
-      <h2 className="text-xl font-bold mb-4 text-center hover:underline underline-offset-7 ">
+    <div>
+      <h2 className="text-xl font-bold mb-4 text-center hover:underline underline-offset-8">
         Newest Posts
       </h2>
       {postsIsLoading && <Loader />}
       {postsIsError && <p>Error: {postsIsError}</p>}
 
       {!postsIsLoading && !postsIsError && posts.length > 0 && (
-        <div className="flex justify-between p-2 gap-3 flex-wrap">
+        <div className="flex justify-between p-2 gap-4 md:gap-5 flex-wrap">
           {/* First Post */}
           {firstPost && <MainPost post={firstPost} key={firstPost._id} />}
 
           {/* First Line Post Group */}
-          <div className="flex flex-col gap-4 w-[48%]">
+          <div className="flex flex-col gap-4 w-full md:w-[48%]">
             {firstLinePostGroup.map((post) => (
               <SidePost post={post} key={post._id} />
             ))}
           </div>
-          
+
           {/* Second Line Post Group */}
-          <div className="flex flex-col gap-4 w-[48%]">
+          <div className="flex flex-col gap-4 w-full md:w-[48%]">
             {secondLinePostGroup.map((post) => (
               <SidePost post={post} key={post._id} />
             ))}

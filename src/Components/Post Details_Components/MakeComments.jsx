@@ -44,10 +44,10 @@ const MakeComments = () => {
   };
 
   return (
-    <div className="p-4 border border-gray-300 rounded-lg flex flex-col gap-4">
-      <h1 className="text-center font-bold text-2xl hover:underline underline-offset-4 mb-2">
+    <div className="p-4 md:p-5 border border-white/10 rounded-lg flex flex-col gap-4 bg-white/5">
+      <h2 className="text-center font-bold text-xl md:text-2xl">
         Add a Comment
-      </h1>
+      </h2>
       <form
         onSubmit={(e) => submitForm(e)}
         className="flex flex-col gap-3"
@@ -60,19 +60,21 @@ const MakeComments = () => {
           onChange={handleChange}
           value={formData.username}
           placeholder="Your Name"
-          className="border border-gray-300 p-2 rounded-md"
+          className="border border-white/10 bg-transparent p-2 rounded-md focus:outline-none focus:ring-2"
+          style={{ outlineColor: primaryColor }}
         />
         <textarea
-          className="w-full border border-gray-300 p-2 rounded-md"
+          className="w-full border border-white/10 bg-transparent p-2 rounded-md focus:outline-none focus:ring-2"
           name="comment"
           value={formData.comment}
           onChange={handleChange}
           id="comment"
           rows="4"
           placeholder="Write your comment..."
+          style={{ outlineColor: primaryColor }}
         ></textarea>
         <button
-          className="mt-2 text-white font-semibold px-8 py-2 rounded-md w-fit mx-auto"
+          className="mt-2 text-white font-semibold px-6 py-2 rounded-md w-fit self-center hover:opacity-90"
           style={{ backgroundColor: primaryColor }}
         >
           Submit

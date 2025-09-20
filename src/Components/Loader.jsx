@@ -1,16 +1,16 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Loader = () => {
+  const { primaryColor } = useSelector((s) => s.color.colors);
   return (
-    <StyledWrapper>
-      <div className="w-full h-[80vh] flex items-center justify-center bg-gray-900">
-        <div className="wrapper">
-          <div className="circle" />
-          <div className="circle" />
-          <div className="circle" />
-          <div className="shadow" />
-          <div className="shadow" />
-          <div className="shadow" />
+    <StyledWrapper style={{ "--accent": primaryColor }}>
+      <div className="w-full h-[60vh] flex items-center justify-center bg-[#0b0b0b]">
+        <div className="loader">
+          <span />
+          <span />
+          <span />
+          <span />
         </div>
       </div>
     </StyledWrapper>
@@ -18,93 +18,48 @@ const Loader = () => {
 };
 
 const StyledWrapper = styled.div`
-  .wrapper {
-    width: 200px;
-    height: 60px;
+  .loader {
+    --size: 56px;
     position: relative;
-    z-index: 1;
+    width: var(--size);
+    height: var(--size);
   }
-
-  .circle {
-    width: 20px;
-    height: 20px;
+  .loader span {
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 50%;
-    background-color: #fff;
-    left: 15%;
-    transform-origin: 50%;
-    animation: circle7124 0.5s alternate infinite ease;
+    border: 3px solid transparent;
+    animation: ring 1.2s linear infinite;
+  }
+  .loader span:nth-child(1) {
+    border-top-color: var(--accent);
+  }
+  .loader span:nth-child(2) {
+    border-right-color: color-mix(in srgb, var(--accent) 70%, white);
+    animation-delay: -0.2s;
+  }
+  .loader span:nth-child(3) {
+    border-bottom-color: color-mix(in srgb, var(--accent) 50%, white);
+    animation-delay: -0.4s;
+  }
+  .loader span:nth-child(4) {
+    border-left-color: color-mix(in srgb, var(--accent) 30%, white);
+    animation-delay: -0.6s;
   }
 
-  @keyframes circle7124 {
+  @keyframes ring {
     0% {
-      top: 60px;
-      height: 5px;
-      border-radius: 50px 50px 25px 25px;
-      transform: scaleX(1.7);
+      transform: rotate(0deg) scale(0.9);
     }
-
-    40% {
-      height: 20px;
-      border-radius: 50%;
-      transform: scaleX(1);
+    50% {
+      transform: rotate(180deg) scale(1);
     }
-
     100% {
-      top: 0%;
+      transform: rotate(360deg) scale(0.9);
     }
-  }
-
-  .circle:nth-child(2) {
-    left: 45%;
-    animation-delay: 0.2s;
-  }
-
-  .circle:nth-child(3) {
-    left: auto;
-    right: 15%;
-    animation-delay: 0.3s;
-  }
-
-  .shadow {
-    width: 20px;
-    height: 4px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.9);
-    position: absolute;
-    top: 62px;
-    transform-origin: 50%;
-    z-index: -1;
-    left: 15%;
-    filter: blur(1px);
-    animation: shadow046 0.5s alternate infinite ease;
-  }
-
-  @keyframes shadow046 {
-    0% {
-      transform: scaleX(1.5);
-    }
-
-    40% {
-      transform: scaleX(1);
-      opacity: 0.7;
-    }
-
-    100% {
-      transform: scaleX(0.2);
-      opacity: 0.4;
-    }
-  }
-
-  .shadow:nth-child(4) {
-    left: 45%;
-    animation-delay: 0.2s;
-  }
-
-  .shadow:nth-child(5) {
-    left: auto;
-    right: 15%;
-    animation-delay: 0.3s;
   }
 `;
 

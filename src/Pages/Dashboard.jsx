@@ -19,17 +19,17 @@ const Dashboard = () => {
       />
       <Header />
       <div
-        className="w-[100%] lg:p-0 xl:w-[1200px] relative flex flex-col lg:flex-row justify-between mx-auto my-10"
+        className="w-full lg:p-0 xl:w-[1200px] relative flex flex-col lg:flex-row justify-between mx-auto my-6 md:my-10 gap-6"
         style={{ color: textColor }}
       >
         {/* Main Content */}
-        <div className="w-full lg:w-[69%] h-full flex flex-col gap-5 p-5">
+        <div className="w-full lg:w-[69%] h-full flex flex-col gap-6 p-4 md:p-5">
           <Hero />
           <NewestPosts />
         </div>
 
         {/* Side Bar */}
-        <div className="w-full lg:w-[29%] h-[100%] rounded-lg flex flex-row lg:flex-col gap-10 p-5">
+        <div className="w-full lg:w-[29%] h-full rounded-lg flex flex-wrap flex-row lg:flex-col gap-6 p-4 md:p-5">
           <SideBar start={0} end={4} title={"Trending"} />
           <AdsterraAd />
           <AdsterraPopunder />

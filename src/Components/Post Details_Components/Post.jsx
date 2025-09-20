@@ -13,8 +13,6 @@ const Post = ({ id }) => {
     (state) => state.posts
   );
 
-  // document.title = post?.title + " - IntraVerse";
-
   useEffect(() => {
     dispatch(getPostById(id));
   }, [dispatch, id]);
@@ -47,32 +45,41 @@ const Post = ({ id }) => {
         dateModified={post?.updatedAt}
       />
 
-      <div className="flex flex-col gap-2 p-3">
+      <div className="flex flex-col gap-3 p-3">
         {/* Category */}
-        <h2 className="font-bold uppercase" style={{ color: primaryColor }}>
+        <h2
+          className="font-bold uppercase tracking-wide text-sm w-fit px-2 py-1 rounded"
+          style={{ backgroundColor: primaryColor }}
+        >
           {post?.category}
         </h2>
 
         {/* Title */}
-        <h1 className="text-3xl font-extrabold">{post?.title}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">
+          {post?.title}
+        </h1>
 
         {/* Date */}
-        <p className="text-sm text-gray-500">
+        <p className="text-sm opacity-80">
           Published on: {new Date(post?.createdAt).toLocaleDateString()}
         </p>
 
         {/* Image */}
-        <img
-          src={post?.image}
-          alt={post?.title}
-          className="w-full h-auto rounded-lg"
-        />
+        <div className="w-full overflow-hidden rounded-xl shadow-lg">
+          <img
+            src={post?.image}
+            alt={post?.title}
+            className="w-full h-auto object-cover"
+          />
+        </div>
 
         {/* Content */}
-        <p
-          className="text-lg leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: post?.content }}
-        />
+        <div className="prose prose-invert max-w-none text-[1.05rem] leading-relaxed">
+          <p
+            className="ck-render"
+            dangerouslySetInnerHTML={{ __html: post?.content }}
+          />
+        </div>
       </div>
     </>
   );
