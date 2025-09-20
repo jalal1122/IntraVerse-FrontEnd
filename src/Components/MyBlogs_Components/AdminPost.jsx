@@ -9,9 +9,7 @@ import {
 const AdminPost = ({ post, primaryColor }) => {
   const navigate = useNavigate();
 
-  const { deletePostLoading, deletePostError, deletePostSuccess } = useSelector(
-    (state) => state.admin
-  );
+  // Admin delete state will be accessed inside the modal to avoid stale closures
 
   const dispatch = useDispatch();
 
@@ -25,6 +23,8 @@ const AdminPost = ({ post, primaryColor }) => {
 
   const RenderModal = () => {
     const { textColor, bgColor } = useSelector((state) => state.color.colors);
+    const { deletePostLoading, deletePostError, deletePostSuccess } =
+      useSelector((state) => state.admin);
 
     useEffect(() => {
       if (deletePostSuccess) {
@@ -32,80 +32,114 @@ const AdminPost = ({ post, primaryColor }) => {
         setPostToDelete(null);
         dispatch(resetDeletePost());
       }
-    }, [deletePostSuccess, dispatch]);
+    }, [deletePostSuccess]);
 
     return (
-      <div className="fixed inset-0 bg-[rgba(0,0,0,0.9)] flex items-center justify-center z-50">
-        {deletePostError && (
-          <p className="text-red-500 text-center mb-4">{deletePostError}</p>
-        )}
-        {deletePostLoading ? (
-          <div
-            className="w-[300px] h-fit px-5 py-3 flex items-center justify-center"
-            style={{ backgroundColor: textColor }}
-          >
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p style={{ color: bgColor }}>Deleting Post...</p>
+      <div className="fixed inset-0 z-50">
+        <div
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setShowModal(false)}
+        />
+        <div className="relative h-full w-full flex items-center justify-center p-4">
+          {deletePostLoading ? (
+            <div
+              className="w-[320px] px-6 py-6 rounded-xl shadow-xl border border-white/10"
+              style={{ backgroundColor: textColor }}
+            >
+              <div className="text-center" style={{ color: bgColor }}>
+                <div
+                  className="animate-spin rounded-full h-10 w-10 border-2 border-t-transparent mx-auto mb-4"
+                  style={{ borderColor: primaryColor }}
+                ></div>
+                <p>Deleting post...</p>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div
-            className="p-6 rounded-xl shadow-lg"
-            style={{ backgroundColor: textColor, color: bgColor }}
-          >
-            <h2 className="text-xl font-bold mb-4">Confirm Deletion</h2>
-            <p className="mb-4">Are you sure you want to delete this post?</p>
-            <div className="flex justify-end gap-4">
-              <button
-                className="px-4 py-2 font-semibold rounded hover:cursor-pointer hover:scale-95 transition-all duration-300 active:scale-105"
-                style={{ backgroundColor: primaryColor, color: "white" }}
-                onClick={() => setShowModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 rounded hover:cursor-pointer hover:scale-95 transition-all duration-300 active:scale-105"
-                style={{ backgroundColor: primaryColor, color: "white" }}
-                onClick={() => handlePostDelete(postToDelete)}
-              >
-                Delete
-              </button>
+          ) : (
+            <div
+              className="w-full max-w-md p-6 rounded-2xl shadow-xl border border-white/10"
+              style={{ backgroundColor: textColor, color: bgColor }}
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="text-xl font-bold">Delete post?</h2>
+                  <p className="text-sm mt-1 opacity-80">
+                    This action cannot be undone.
+                  </p>
+                </div>
+                <button
+                  aria-label="Close"
+                  className="ml-3 rounded-full p-1 hover:opacity-80"
+                  style={{ color: bgColor }}
+                  onClick={() => setShowModal(false)}
+                >
+                  ✕
+                </button>
+              </div>
+              {deletePostError && (
+                <p className="text-sm text-red-500 mt-3">{deletePostError}</p>
+              )}
+              <div className="mt-6 flex justify-end gap-3">
+                <button
+                  className="px-4 py-2 rounded-lg border border-gray-300/50 hover:opacity-90 transition"
+                  onClick={() => setShowModal(false)}
+                  style={{ color: bgColor }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 rounded-lg shadow-sm hover:opacity-90 active:scale-[0.99] transition"
+                  style={{ backgroundColor: primaryColor, color: "white" }}
+                  onClick={() => handlePostDelete(postToDelete)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   };
 
   return (
-    <div className="w-80 border rounded-lg border-gray-300 p-2" key={post._id}>
-      <img
-        src={post.image}
-        alt={post.title}
-        className="h-40 w-full object-cover rounded-lg"
-      />
+    <div
+      className="w-full max-w-sm border rounded-xl border-gray-200/50 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 bg-white/5 backdrop-blur-sm"
+      key={post._id}
+    >
+      <div className="relative">
+        <img
+          src={post.image}
+          alt={post.title}
+          className="h-44 w-full object-cover"
+        />
+        <span
+          className="absolute top-2 left-2 text-xs px-2 py-1 rounded-full backdrop-blur-sm"
+          style={{ backgroundColor: `${primaryColor}E6`, color: "white" }}
+        >
+          {post.category}
+        </span>
+      </div>
 
-      <div className="p-2">
-        <h1 className="text-xl font-bold">{post.title}</h1>
-        <div className="flex justify-between">
-          <p className="text-sm">{post.category}</p>
-          <p className="text-sm">
-            {new Date(post.createdAt).toLocaleDateString()}
-          </p>
+      <div className="p-3">
+        <h1 className="text-base font-semibold line-clamp-2 min-h-[2.5rem]">
+          {post.title}
+        </h1>
+        <div className="mt-1 flex items-center justify-between text-xs opacity-80">
+          <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+          {/* placeholder for views/comments in future */}
         </div>
 
-        <div className="flex justify-center gap-4 mt-2">
+        <div className="flex justify-center gap-3 mt-3">
           <button
-            className="px-7 py-1 rounded hover:cursor-pointer hover:scale-95 transition-all duration-3 active:scale-105"
+            className="px-4 py-1.5 rounded-lg shadow-sm hover:opacity-90 active:scale-[0.99] transition"
             style={{ backgroundColor: primaryColor, color: "white" }}
             onClick={() => navigate(`/edit-blog/${post._id}`)}
           >
             Edit
           </button>
           <button
-            className="px-7 py-1 rounded hover:cursor-pointer hover:scale-95 transition-all duration-300 active:scale-105"
-            style={{ backgroundColor: primaryColor, color: "white" }}
+            className="px-4 py-1.5 rounded-lg border border-gray-300/60 hover:opacity-90 active:scale-[0.99] transition"
+            style={{ color: "white", backgroundColor: primaryColor }}
             onClick={() => {
               setPostToDelete(post._id);
               setShowModal(true);
