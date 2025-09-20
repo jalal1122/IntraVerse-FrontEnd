@@ -15,14 +15,25 @@ const Comments = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
-        <h1 className="text-center font-bold text-2xl hover:underline underline-offset-4 mb-2">Comments</h1>
-      {postsComments.map((comment) => (
-        <div key={comment._id} className="border-b border-gray-300 py-2">
-          <p className="font-semibold">By {comment?.userName}</p>
-          <p className=" font-bold text-xl">{comment?.text}</p>
-        </div>
-      ))}
+    <div className="w-full rounded-lg border border-white/10 overflow-hidden">
+      <div className="px-4 py-3 border-b border-white/10">
+        <h2 className="text-center font-bold text-xl md:text-2xl">Comments</h2>
+      </div>
+      <div className="divide-y divide-white/10">
+        {postsComments.map((comment) => (
+          <div key={comment._id} className="px-4 py-3">
+            <p className="font-semibold text-sm opacity-80">
+              By {comment?.userName}
+            </p>
+            <p className="mt-1 text-base md:text-lg">{comment?.text}</p>
+          </div>
+        ))}
+        {postsComments.length === 0 && (
+          <div className="px-4 py-6 text-center opacity-80">
+            No comments yet
+          </div>
+        )}
+      </div>
     </div>
   );
 };

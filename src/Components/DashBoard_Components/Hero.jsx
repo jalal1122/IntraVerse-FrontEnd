@@ -40,28 +40,30 @@ const Hero = () => {
   return (
     <>
       {trendingPosts[0] && (
-        <div className="w-[100%] h-[400px] rounded-lg relative overflow-hidden">
+        <div className="w-full h-[240px] sm:h-[320px] md:h-[420px] rounded-xl relative overflow-hidden group">
           <Link to={`/post/${trendingPosts[0]._id}`}>
             <img
               src={trendingPosts[0].image}
               alt={trendingPosts[0].title}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </Link>
 
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-5">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+          <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5">
             <h3
-              className="text-lg font-semibold  w-fit px-2 py-1"
+              className="text-xs sm:text-sm md:text-base font-semibold uppercase tracking-wide w-fit px-2 py-1 rounded"
               style={{ backgroundColor: primaryColor }}
             >
               Featured/{trendingPosts[0].category}
             </h3>
             <Link to={`/post/${trendingPosts[0]._id}`}>
-            <h2 className="text-3xl font-bold text-white">
-              {trendingPosts[0].title}
-            </h2>
+              <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl font-extrabold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                {trendingPosts[0].title}
+              </h2>
             </Link>
-            <p className=" mt-2 ml-3 text-white">
+            <p className="mt-2 ml-1 sm:ml-2 text-white/90 text-sm sm:text-base">
               {trendingPosts[0].createdAt.split("T")[0]}
             </p>
           </div>
