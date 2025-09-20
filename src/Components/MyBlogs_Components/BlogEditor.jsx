@@ -2,16 +2,32 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./content.css";
 
-const BlogEditor = ({ onSave, initialData }) => {
+// BlogEditor wraps CKEditor 5 and exposes a simple API. You can theme it
+// by passing theme={{ primaryColor, textColor }} and customize the placeholder.
+const BlogEditor = ({
+  onSave,
+  initialData,
+  placeholder = "Write your post...",
+  theme,
+}) => {
   const handleSave = (data) => {
-    onSave(data);
+    if (onSave) onSave(data);
   };
 
   return (
-    <div className="ckEditor text-black">
+    <div
+      className="ckEditor"
+      style={{
+        "--primary-color": theme?.primaryColor || "#3b82f6",
+        "--text-color": theme?.textColor || "#111827",
+      }}
+    >
       <CKEditor
         editor={ClassicEditor}
         data={initialData || ""}
+        config={{
+          placeholder,
+        }}
         onChange={(_, editor) => {
           handleSave(editor.getData());
         }}

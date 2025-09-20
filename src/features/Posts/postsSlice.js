@@ -7,14 +7,17 @@ const initialState = {
   post: null,
   postsComments: [],
   makeComment: null,
+  postSearchResults: [],
   postIsLoading: false,
   postsIsLoading: false,
   trendingPostsIsLoading: false,
   postsCommentsIsLoading: false,
   makeCommentIsLoading: false,
+  postSearchResultsIsLoading: false,
   postsIsError: null,
   trendingPostsIsError: null,
   postIsError: null,
+  postSearchResultsIsError: null,
   postsCommentsIsError: null,
   makeCommentIsError: null,
   postsIsSuccess: false,
@@ -22,7 +25,27 @@ const initialState = {
   postIsSuccess: false,
   postsCommentsIsSuccess: false,
   makeCommentIsSuccess: false,
+  postSearchResultsIsSuccess: false,
 };
+
+// search posts by query
+export const searchPosts = createAsyncThunk(
+  "posts/searchPosts",
+  async (query, thunkAPI) => {
+    try {
+      const response = await postsService.searchPosts(query);
+      return response.data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Add a comment to a post
 export const addComment = createAsyncThunk(
@@ -134,10 +157,25 @@ const postsSlice = createSlice({
       state.trendingPostsIsError = null;
       state.trendingPostsIsSuccess = false;
     },
-    postsReset: (state) => {
-      state.postsIsLoading = false;
-      state.postsIsError = null;
-      state.postsIsSuccess = false;
+    postsCommentsReset: (state) => {
+      state.postsCommentsIsLoading = false;
+      state.postsCommentsIsError = null;
+      state.postsCommentsIsSuccess = false;
+    },
+    postSearchResultsReset: (state) => {
+      state.postSearchResultsIsLoading = false;
+      state.postSearchResultsIsError = null;
+      state.postSearchResultsIsSuccess = false;
+    },
+    makeCommentReset: (state) => {
+      state.makeCommentIsLoading = false;
+      state.makeCommentIsError = null;
+      state.makeCommentIsSuccess = false;
+    },
+    postReset: (state) => {
+      state.postIsLoading = false;
+      state.postIsError = null;
+      state.postIsSuccess = false;
     },
   },
   extraReducers: (builder) => {
@@ -215,10 +253,36 @@ const postsSlice = createSlice({
         state.postsCommentsIsLoading = false;
         state.postsCommentsIsError = action.payload;
         state.postsCommentsIsSuccess = false;
+      })
+
+      /////////////
+      // search posts
+      ////////////
+      .addCase(searchPosts.pending, (state) => {
+        state.postSearchResultsIsLoading = true;
+        state.postSearchResultsIsError = null;
+        state.postSearchResultsIsSuccess = false;
+      })
+      .addCase(searchPosts.fulfilled, (state, action) => {
+        state.postSearchResultsIsLoading = false;
+        state.postSearchResultsIsError = null;
+        state.postSearchResultsIsSuccess = true;
+        state.postSearchResults = action.payload;
+      })
+      .addCase(searchPosts.rejected, (state, action) => {
+        state.postSearchResultsIsLoading = false;
+        state.postSearchResultsIsError = action.payload;
+        state.postSearchResultsIsSuccess = false;
       });
   },
 });
 
-export const { postsReset, trendingPostsReset, postsCommentsReset } =
-  postsSlice.actions;
+export const {
+  postsReset,
+  trendingPostsReset,
+  postsCommentsReset,
+  postSearchResultsReset,
+  makeCommentReset,
+  postReset,
+} = postsSlice.actions;
 export default postsSlice.reducer;

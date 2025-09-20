@@ -30,12 +30,18 @@ const addComment = async (commentData) => {
   return response.data;
 };
 
+const searchPosts = async (query) => {
+  const response = await axios.get(`/api/posts?search=${query}`);
+  return response.data;
+};
+
 const postsService = {
   getTrendingPosts,
   getAllPosts,
   addComment,
   getPostById,
   getPostComments,
+  searchPosts,
 };
 
 export default postsService;

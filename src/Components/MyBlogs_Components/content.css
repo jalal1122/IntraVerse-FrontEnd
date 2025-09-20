@@ -26,3 +26,173 @@
   width: 20px;
   display: inline;
 }
+
+/* --- Enhancements: themeable toolbar, editable area, and content --- */
+.ckEditor {
+  /* These are defaults. BlogEditor injects values via inline style. */
+  --primary-color: #3b82f6; /* blue-500 */
+  --text-color: #111827; /* slate-900 */
+  --bg-color: #ffffff;
+  --muted-color: #6b7280; /* slate-500 */
+  --border-color: rgba(0, 0, 0, 0.08);
+  --ring-color: rgba(59, 130, 246, 0.25);
+}
+
+/* Editor chrome */
+.ckEditor .ck.ck-editor {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Toolbar */
+.ckEditor .ck.ck-toolbar {
+  background: var(--bg-color);
+  border-color: var(--border-color);
+}
+
+.ckEditor .ck.ck-toolbar .ck-toolbar__separator {
+  background: var(--border-color);
+}
+
+.ckEditor .ck.ck-button {
+  color: var(--text-color);
+}
+.ckEditor .ck.ck-button:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.ckEditor .ck.ck-button.ck-on {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+/* Dropdown panel */
+.ckEditor .ck.ck-dropdown__panel {
+  border-color: var(--border-color);
+  background: var(--bg-color);
+}
+
+/* Editable area */
+.ckEditor .ck.ck-editor__main > .ck-editor__editable {
+  min-height: 260px;
+  padding: 16px 18px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.ckEditor .ck.ck-editor__main > .ck-editor__editable:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--ring-color);
+}
+
+/* Content inside editor */
+.ckEditor .ck-content {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-color);
+}
+.ckEditor .ck-content p {
+  margin: 0.75rem 0;
+}
+.ckEditor .ck-content h1,
+.ckEditor .ck-content h2,
+.ckEditor .ck-content h3,
+.ckEditor .ck-content h4,
+.ckEditor .ck-content h5,
+.ckEditor .ck-content h6 {
+  color: var(--text-color);
+  margin: 1.25rem 0 0.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.ckEditor .ck-content h1 {
+  font-size: 2rem;
+}
+.ckEditor .ck-content h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.6);
+  padding-bottom: 0.25rem;
+}
+.ckEditor .ck-content h3 {
+  font-size: 1.25rem;
+  border-left: 4px solid rgba(59, 130, 246, 0.6);
+  padding-left: 0.5rem;
+}
+.ckEditor .ck-content h4 {
+  font-size: 1.125rem;
+}
+.ckEditor .ck-content h5 {
+  font-size: 1rem;
+}
+.ckEditor .ck-content h6 {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+/* Lists */
+.ckEditor .ck-content ul,
+.ckEditor .ck-content ol {
+  margin: 0.5rem 1.25rem;
+}
+
+/* Quote */
+.ckEditor .ck-content blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid rgba(59, 130, 246, 0.5);
+  color: var(--muted-color);
+  background: rgba(59, 130, 246, 0.06);
+  border-radius: 6px;
+}
+
+/* Code */
+.ckEditor .ck-content pre {
+  background: #0f172a; /* slate-900 */
+  color: #e2e8f0; /* slate-200 */
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.ckEditor .ck-content code {
+  background: rgba(59, 130, 246, 0.1);
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
+}
+
+/* Links */
+.ckEditor .ck-content a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ckEditor .ck-content a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Images */
+.ckEditor .ck-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0.75rem auto;
+}
+
+/* Tables */
+.ckEditor .ck-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.ckEditor .ck-content th,
+.ckEditor .ck-content td {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+}
+
+/* Placeholder */
+.ckEditor .ck.ck-editor__main .ck-placeholder {
+  color: rgba(17, 24, 39, 0.45);
+}
