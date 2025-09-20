@@ -7,7 +7,9 @@ const Header = () => {
   // Initialize Redux dispatch and selectors
   // to access color state and mode
 
-  const {primaryColor, textColor} = useSelector((state) => state.color.colors);
+  const { primaryColor, textColor } = useSelector(
+    (state) => state.color.colors
+  );
 
   // render the header component
   return (
@@ -40,33 +42,35 @@ const Header = () => {
           </h1>
         </div>
 
-        {/* Nav Links Div */}
-        <div className="div">
-          <ul className="flex justify-between items-center gap-5 font-semibold text-lg">
-            <li
-              style={{
-                color: textColor,
-                cursor: "pointer",
-              }}
-            >
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li
-              style={{
-                color: textColor,
-                cursor: "pointer",
-              }}
-            >
-              <Link to={"/my-blogs"}>MyBlogs</Link>
-            </li>
-          </ul>
+        <div className="flex justify-between items-center gap-7 hidden md:visible">
+          {/* Nav Links Div */}
+          <div className="div">
+            <ul className="flex justify-between items-center gap-5 font-semibold text-lg">
+              <li
+                style={{
+                  color: textColor,
+                  cursor: "pointer",
+                }}
+              >
+                <Link to={"/"}>Home</Link>
+              </li>
+              <li
+                style={{
+                  color: textColor,
+                  cursor: "pointer",
+                }}
+              >
+                <Link to={"/my-blogs"}>MyBlogs</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Search  */}
+          <SearchBar />
+
+          {/* Icons */}
+          <RightSideIcons />
         </div>
-
-        {/* Search  */}
-        <SearchBar />
-
-        {/* Icons */}
-        <RightSideIcons />
       </header>
     </>
   );
