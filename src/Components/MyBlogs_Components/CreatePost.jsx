@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import Header from "../Header/Header";
 import selectCategories from "../../utils/blogCategories.js";
 import BlogEditor from "./BlogEditor";
-import BlogViewer from "./BlogViewer.jsx";
+import TagsInput from "./TagsInput";
 
 const CreatePost = () => {
   const { textColor, primaryColor } = useSelector(
@@ -22,6 +22,7 @@ const CreatePost = () => {
     content: "",
     category: "",
     image: null,
+    tags: [],
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -173,6 +174,20 @@ const CreatePost = () => {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="sm:col-span-2">
+                      <label className="block text-sm font-medium mb-1 opacity-80">
+                        Tags
+                      </label>
+                      <TagsInput
+                        value={postData.tags}
+                        onChange={(tags) =>
+                          setPostData((p) => ({ ...p, tags }))
+                        }
+                        theme={{ primaryColor, textColor }}
+                        placeholder="Add tags (e.g. javascript, react)"
+                      />
+                    </div>
+
                     <div>
                       <label
                         htmlFor="category"

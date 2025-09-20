@@ -11,6 +11,7 @@ import {
 import selectCategories from "../../utils/blogCategories.js";
 import Loader from "../Loader";
 import BlogEditor from "./BlogEditor";
+import TagsInput from "./TagsInput";
 
 const EditPost = () => {
   const { id } = useParams();
@@ -40,6 +41,7 @@ const EditPost = () => {
     content: "",
     category: "",
     image: null,
+    tags: [],
   });
 
   const handleOnChange = (e) => {
@@ -64,11 +66,15 @@ const EditPost = () => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
 
+    console.log(postData.tags);
+    
+
     const updatedPostData = {
       id,
       title: postData.title,
       content: postData.content,
       category: postData.category,
+      tags: postData.tags,
       image: postData.image,
     };
 
@@ -96,6 +102,7 @@ const EditPost = () => {
         content: editPost?.content,
         category: editPost?.category,
         image: editPost?.image,
+        tags: Array.isArray(editPost?.tags) ? editPost.tags : [],
       }));
 
       console.log(editPost);
@@ -204,6 +211,18 @@ const EditPost = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="sm:col-span-2">
+                        <label className="block text-sm font-medium mb-1 opacity-80">
+                          Tags
+                        </label>
+                        <TagsInput
+                          value={postData.tags}
+                          onChange={(tags) =>
+                            setPostData((p) => ({ ...p, tags }))
+                          }
+                        />
+                      </div>
+
                       <div>
                         <label
                           htmlFor="category"

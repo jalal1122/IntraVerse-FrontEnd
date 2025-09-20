@@ -55,7 +55,7 @@ const MyBlogs = () => {
 
       <div
         style={{ color: textColor }}
-        className="w-[1200px] flex flex-col gap-5 mx-auto my-10"
+        className="w-full lg:p-0 xl:w-[1200px] flex flex-col gap-5 mx-auto my-10"
       >
         <div className="flex justify-between mx-5 items-center">
           <h1 className="text-3xl font-bold">My Blogs</h1>
@@ -88,7 +88,7 @@ const MyBlogs = () => {
         {adminIsSuccess && adminPosts.length === 0 ? (
           <h1 className="text-3xl font-bold text-center">No Blogs Found</h1>
         ) : (
-          <div className="flex flex-wrap gap-3 p-2">
+          <div className="flex flex-wrap justify-center-safe items-center gap-3 p-2">
             {adminPosts.map((post) => (
               <AdminPost
                 post={post}
