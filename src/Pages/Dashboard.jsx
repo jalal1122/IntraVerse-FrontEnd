@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import SideBar from "../Components/DashBoard_Components/SideBar";
 import NewestPosts from "../Components/DashBoard_Components/NewestPosts";
 import SEO from "../Components/SEO";
+import AdsterraAd from "../Components/AdsterraAd";
+import AdsterraPopunder from "../Components/AdsterraPopunder";
 
 const Dashboard = () => {
   const { textColor } = useSelector((state) => state.color.colors);
@@ -29,6 +31,8 @@ const Dashboard = () => {
         {/* Side Bar */}
         <div className="w-full lg:w-[29%] h-[100%] rounded-lg flex flex-row lg:flex-col gap-10 p-5">
           <SideBar start={0} end={4} title={"Trending"} />
+          <AdsterraAd />
+          <AdsterraPopunder />
           <SideBar start={4} end={8} title={"Popular"} />
         </div>
       </div>
