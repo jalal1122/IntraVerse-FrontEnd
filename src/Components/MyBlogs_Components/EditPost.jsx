@@ -2,7 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import Header from "../Header/Header";
 import { useEffect, useState } from "react";
-import { getEditPost, updatePost, resetEditPost, resetUpdatePost } from "../../features/admin/adminSlice.js";
+import {
+  getEditPost,
+  updatePost,
+  resetEditPost,
+  resetUpdatePost,
+} from "../../features/admin/adminSlice.js";
 import selectCategories from "../../utils/blogCategories.js";
 import Loader from "../Loader";
 import BlogEditor from "./BlogEditor";
@@ -128,90 +133,144 @@ const EditPost = () => {
       )}
 
       {/* Edit Post */}
-      <div
-        style={{ color: textColor }}
-        className="w-[1200px] mx-auto my-10 flex flex-col gap-5"
-      >
-        <h1 className="font-bold text-center text-3xl">Edit Post</h1>
+      <div className="px-4 sm:px-6 lg:px-8 mt-6">
+        <div className="max-w-6xl mx-auto" style={{ color: textColor }}>
+          <h1 className="font-extrabold text-2xl sm:text-3xl text-center tracking-tight">
+            Edit Post
+          </h1>
 
-        {/* Edit Post Content */}
-        {!editPostLoading && editPostSuccess && (
-          <form onSubmit={formSubmitHandler}>
-            <div className="flex flex-col gap-3 w-[600px] mx-auto">
-              {/* Post Image Preview */}
-              {postData.image && (
-                <img
-                  src={
-                    postData?.image === editPost?.image
-                      ? postData.image
-                      : imagePreview
-                  }
-                  alt="Post"
-                  className="h-auto w-[55%] mx-auto object-cover rounded object-center"
-                />
-              )}
+          {!editPostLoading && editPostSuccess && (
+            <form onSubmit={formSubmitHandler} className="mt-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Preview card */}
+                <div className="lg:col-span-1">
+                  <div className="rounded-xl border border-gray-200/40 shadow-sm overflow-hidden bg-white/5 backdrop-blur-sm">
+                    <div className="p-4 border-b border-gray-200/30">
+                      <p className="text-sm opacity-80">Current cover image</p>
+                    </div>
+                    <div className="p-4 flex items-center justify-center min-h-[180px]">
+                      {postData.image ? (
+                        <img
+                          src={
+                            postData?.image === editPost?.image
+                              ? postData.image
+                              : imagePreview
+                          }
+                          alt="Post"
+                          className="w-full h-48 object-cover rounded-md shadow-sm"
+                        />
+                      ) : (
+                        <div className="w-full h-48 rounded-md border border-dashed border-gray-300 flex items-center justify-center text-sm opacity-70">
+                          No image
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-              {/* Title */}
-              <input
-                type="text"
-                name="title"
-                value={postData.title}
-                onChange={handleOnChange}
-                placeholder="Title"
-                className="border border-gray-300 p-2 rounded"
-              />
+                {/* Form fields */}
+                <div className="lg:col-span-2">
+                  <div className="rounded-xl border border-gray-200/40 shadow-sm p-4 sm:p-6 space-y-4 bg-white/5 backdrop-blur-sm">
+                    <div>
+                      <label
+                        htmlFor="title"
+                        className="block text-sm font-medium mb-1 opacity-80"
+                      >
+                        Title
+                      </label>
+                      <input
+                        id="title"
+                        type="text"
+                        name="title"
+                        value={postData.title}
+                        onChange={handleOnChange}
+                        placeholder="Title"
+                        className="w-full p-2.5 rounded-lg border border-gray-300/60 bg-transparent focus:outline-none focus:ring-2"
+                        style={{
+                          boxShadow: `0 0 0 0 rgba(0,0,0,0)`,
+                          outlineColor: primaryColor,
+                        }}
+                      />
+                    </div>
 
-              {/* Content */}
-              <BlogEditor onSave={handleSave} initialData={postData.content} />
+                    <div>
+                      <label className="block text-sm font-medium mb-1 opacity-80">
+                        Content
+                      </label>
+                      <BlogEditor
+                        onSave={handleSave}
+                        initialData={postData.content}
+                      />
+                    </div>
 
-              {/* <textarea
-                name="content"
-                value={postData.content}
-                onChange={handleOnChange}
-                placeholder="Content"
-                className="border border-gray-300 p-2 rounded"
-              ></textarea> */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label
+                          htmlFor="category"
+                          className="block text-sm font-medium mb-1 opacity-80"
+                        >
+                          Category
+                        </label>
+                        <select
+                          id="category"
+                          name="category"
+                          value={postData.category}
+                          onChange={handleOnChange}
+                          className="w-full p-2.5 rounded-lg border border-gray-300/60 bg-transparent focus:outline-none focus:ring-2"
+                        >
+                          <option value="" disabled>
+                            Select Category
+                          </option>
+                          {selectCategories.map((category) => (
+                            <option
+                              key={category}
+                              value={category}
+                              style={{
+                                color: "white",
+                                backgroundColor: "black",
+                              }}
+                            >
+                              {category}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
-              {/* Categories Select */}
-              <select
-                name="category"
-                value={postData.category}
-                onChange={handleOnChange}
-                className="border border-gray-300 p-2 rounded"
-              >
-                <option value="" disabled>
-                  Select Category
-                </option>
-                {selectCategories.map((category) => (
-                  <option
-                    key={category}
-                    value={category}
-                    style={{ color: "white", backgroundColor: "black" }}
-                  >
-                    {category}
-                  </option>
-                ))}
-              </select>
+                      <div>
+                        <label
+                          htmlFor="image"
+                          className="block text-sm font-medium mb-1 opacity-80"
+                        >
+                          Replace image
+                        </label>
+                        <input
+                          id="image"
+                          type="file"
+                          name="image"
+                          onChange={handleOnChange}
+                          className="w-full p-2.5 rounded-lg border border-gray-300/60 bg-transparent focus:outline-none focus:ring-2"
+                        />
+                      </div>
+                    </div>
 
-              {/* Image Upload */}
-              <input
-                type="file"
-                name="image"
-                onChange={handleOnChange}
-                className="border border-gray-300 p-2 rounded"
-              />
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                style={{ backgroundColor: primaryColor, color: textColor }}
-                className="rounded w-fit px-8 py-2 mx-auto"
-              >
-                Update Post
-              </button>
-            </div>
-          </form>
-        )}
+                    <div className="pt-2 flex justify-center">
+                      <button
+                        type="submit"
+                        style={{
+                          backgroundColor: primaryColor,
+                          color: textColor,
+                        }}
+                        className="rounded-lg w-fit px-8 py-2.5 shadow-sm hover:opacity-90 active:scale-[0.99] transition"
+                      >
+                        Update Post
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </>
   );

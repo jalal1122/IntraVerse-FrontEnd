@@ -104,85 +104,137 @@ const CreatePost = () => {
   return (
     <>
       <Header />
-      <div
-        className="flex flex-col gap-5 p-3 mt-4"
-        style={{
-          color: textColor,
-        }}
-      >
-        <h1 className="font-bold text-3xl text-center">Create Post</h1>
+      <div className="px-4 sm:px-6 lg:px-8 mt-6">
+        <div className="max-w-6xl mx-auto" style={{ color: textColor }}>
+          <h1 className="font-extrabold text-2xl sm:text-3xl text-center tracking-tight">
+            Create Post
+          </h1>
 
-        {/* Create Post Content */}
-
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="flex flex-col gap-3 w-[600px] mx-auto">
+          <form onSubmit={(e) => handleSubmit(e)} className="mt-6">
             {errorMessage && (
-              <h1 className="text-red-500 text-center">{errorMessage}</h1>
+              <p className="text-sm text-red-500 text-center mb-4">
+                {errorMessage}
+              </p>
             )}
 
-            <div>
-              <img
-                src={imagePreview}
-                alt=""
-                className="w-[55%] h-auto rounded object-cover object-center mx-auto"
-              />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Preview card */}
+              <div className="lg:col-span-1">
+                <div className="rounded-xl border border-gray-200/40 shadow-sm overflow-hidden bg-white/5 backdrop-blur-sm">
+                  <div className="p-4 border-b border-gray-200/30">
+                    <p className="text-sm opacity-80">Cover image preview</p>
+                  </div>
+                  <div className="p-4 flex items-center justify-center min-h-[180px]">
+                    {imagePreview ? (
+                      <img
+                        src={imagePreview}
+                        alt="Selected preview"
+                        className="w-full h-48 object-cover rounded-md shadow-sm"
+                      />
+                    ) : (
+                      <div className="w-full h-48 rounded-md border border-dashed border-gray-300 flex items-center justify-center text-sm opacity-70">
+                        No image selected
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Form fields */}
+              <div className="lg:col-span-2">
+                <div className="rounded-xl border border-gray-200/40 shadow-sm p-4 sm:p-6 space-y-4 bg-white/5 backdrop-blur-sm">
+                  <div>
+                    <label
+                      htmlFor="title"
+                      className="block text-sm font-medium mb-1 opacity-80"
+                    >
+                      Title
+                    </label>
+                    <input
+                      id="title"
+                      type="text"
+                      name="title"
+                      placeholder="A captivating headline..."
+                      value={postData.title}
+                      onChange={(e) => handleOnChange(e)}
+                      className="w-full p-2.5 rounded-lg border border-gray-300/60 bg-transparent focus:outline-none focus:ring-2"
+                      style={{
+                        boxShadow: `0 0 0 0 rgba(0,0,0,0)`,
+                        outlineColor: primaryColor,
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-1 opacity-80">
+                      Content
+                    </label>
+                    <BlogEditor onSave={handleSave} />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="category"
+                        className="block text-sm font-medium mb-1 opacity-80"
+                      >
+                        Category
+                      </label>
+                      <select
+                        id="category"
+                        name="category"
+                        value={postData.category}
+                        onChange={(e) => handleOnChange(e)}
+                        className="w-full p-2.5 rounded-lg border border-gray-300/60 bg-transparent focus:outline-none focus:ring-2"
+                      >
+                        <option value="">Select Category</option>
+                        {selectCategories.map((category) => (
+                          <option
+                            value={category}
+                            key={category}
+                            style={{ color: "white", backgroundColor: "black" }}
+                          >
+                            {category}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="image"
+                        className="block text-sm font-medium mb-1 opacity-80"
+                      >
+                        Cover image
+                      </label>
+                      <input
+                        id="image"
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        onChange={(e) => handleOnChange(e)}
+                        className="w-full p-2.5 rounded-lg border border-gray-300/60 bg-transparent focus:outline-none focus:ring-2"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-2 flex justify-center">
+                    <input
+                      type="submit"
+                      disabled={createPostLoading}
+                      style={{
+                        backgroundColor: primaryColor,
+                        color: textColor,
+                      }}
+                      value={createPostLoading ? "Creating..." : "Create Post"}
+                      className="px-8 py-2.5 rounded-lg shadow-sm hover:opacity-90 active:scale-[0.99] transition disabled:opacity-60 disabled:cursor-not-allowed"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={postData.title}
-              onChange={(e) => handleOnChange(e)}
-              className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
-            <BlogEditor onSave={handleSave} />
-
-            {/* <textarea
-              name="content"
-              placeholder="Content"
-              value={postData.content}
-              onChange={(e) => handleOnChange(e)}
-              className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-40"
-            ></textarea> */}
-
-            {/* Categories Select */}
-            <select
-              name="category"
-              value={postData.category}
-              onChange={(e) => handleOnChange(e)}
-              className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select Category</option>
-              {selectCategories.map((category) => (
-                <option
-                  value={category}
-                  key={category}
-                  style={{ color: "white", backgroundColor: "black" }}
-                >
-                  {category}
-                </option>
-              ))}
-            </select>
-
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={(e) => handleOnChange(e)}
-              className="p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
-            <input
-              type="submit"
-              disabled={createPostLoading}
-              style={{ backgroundColor: primaryColor, color: textColor }}
-              value="Create Post"
-              className="px-8 py-2 rounded w-fit mx-auto"
-            />
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );

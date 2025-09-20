@@ -28,6 +28,18 @@ const BlogEditor = ({
         config={{
           placeholder,
         }}
+        onReady={(editor) => {
+          try {
+            const el = editor.ui.view.editable.element;
+            if (el) {
+              el.style.minHeight = "240px";
+              el.style.maxHeight = "60vh";
+              el.style.overflowY = "auto";
+            }
+          } catch {
+            // no-op: ensure no runtime impact
+          }
+        }}
         onChange={(_, editor) => {
           handleSave(editor.getData());
         }}
