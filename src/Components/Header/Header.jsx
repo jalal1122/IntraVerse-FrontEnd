@@ -39,7 +39,7 @@ const Header = () => {
         className="App-header sticky top-0 z-40 w-full border-b border-white/10 backdrop-blur supports-[backdrop-filter]:bg-white/5"
         style={{ color: textColor }}
       >
-        <div className="mx-auto flex items-center justify-between w-full xl:w-[1200px] px-3 xl:px-0 py-3">
+        <div className="mx-auto flex items-center gap-3 justify-between w-full xl:w-[1200px] px-3 xl:px-0 py-3">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <h1
@@ -89,6 +89,19 @@ const Header = () => {
                   style={{ color: textColor }}
                 >
                   About
+                  <span
+                    className="block h-0.5 scale-x-0 transition-transform origin-left"
+                    style={{ backgroundColor: primaryColor }}
+                  ></span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="relative transition-colors"
+                  style={{ color: textColor }}
+                >
+                  Contact
                   <span
                     className="block h-0.5 scale-x-0 transition-transform origin-left"
                     style={{ backgroundColor: primaryColor }}
@@ -175,6 +188,16 @@ const Header = () => {
                     style={{ color: "white" }}
                   >
                     About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    onClick={() => setOpen(false)}
+                    className="block px-2 py-2 rounded transition-colors"
+                    style={{ color: "white" }}
+                  >
+                    Contact
                   </Link>
                 </li>
               </ul>
