@@ -93,7 +93,7 @@ const Login = () => {
     <>
       <Header />
       <div
-        className="flex flex-col justify-center items-center gap-5 w-[1200px] mx-auto my-10 p-5"
+        className="flex flex-col justify-center items-center gap-5 w-full xl:w-[1200px] mx-auto my-10 p-5"
         style={{ color: textColor, backgroundColor: bgColor }}
       >
         {/* Heading */}

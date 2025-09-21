@@ -85,7 +85,7 @@ const Header = () => {
             </ul>
 
             {/* Search */}
-            <div className="hidden md:block">
+            <div className="relative hidden md:block">
               <SearchBar />
             </div>
 
@@ -131,7 +131,7 @@ const Header = () => {
               borderColor: primaryColor + "33",
             }}
           >
-            <div className="px-3 py-3 flex flex-col gap-4 w-full xl:w-[1200px] mx-auto">
+            <div className="relative px-3 py-3 flex flex-col gap-4 w-full xl:w-[1200px] mx-auto">
               <SearchBar />
               <ul className="flex flex-col gap-3 font-semibold text-base">
                 <li>

@@ -96,9 +96,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-sm">
+    <div ref={containerRef} className="relative w-full max-w-sm mx-auto">
       <div
-        className="search flex items-center gap-2 rounded-3xl px-4 py-2 w-full"
+        className="relative search flex items-center gap-2 rounded-3xl px-4 py-2 w-full"
         style={{ backgroundColor: secondaryColor, color: "black" }}
       >
         <FaSearch className="opacity-80" />
@@ -131,7 +131,7 @@ const SearchBar = () => {
       {showModal && (
         <div className="absolute z-50 top-full -translate-x-1/2 mt-2 w-[90vw] md:w-[60vw] max-w-[1100px]">
           <div
-            className="absolute -left-40 w-full rounded-xl shadow-2xl overflow-hidden border"
+            className="absolute left-50 sm:left-50 md:-left-40 w-full rounded-xl shadow-2xl overflow-hidden border"
             style={{
               backgroundColor: "#0b0b0b",
               color: textColor,
