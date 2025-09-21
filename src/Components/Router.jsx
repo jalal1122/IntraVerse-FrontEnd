@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import TermsOfService from "../Pages/TermsOfService";
 import About from "../Pages/About";
+import Contact from "../Pages/Contact";
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -94,6 +95,9 @@ const Router = () => {
 
         {/* Route for About */}
         <Route path="/about" element={<About />} />
+
+        {/* Route for Contact */}
+        <Route path="/contact" element={<Contact />} />
 
         {/* Redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" />} />
