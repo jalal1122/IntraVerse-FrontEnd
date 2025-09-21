@@ -1,28 +1,139 @@
-p h1{
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+/*
+    Post content styles matching the MyBlogs CKEditor content styles.
+    Apply these to a wrapper element with class "ck-render" where your HTML is injected.
+*/
+
+/* Theme variables (can be overridden via inline style if needed) */
+.ck-render {
+  --primary-color: #3b82f6; /* blue-500 */
+  --text-color: #e5e7eb; /* slate-200 for dark prose */
+  --bg-color: transparent;
+  --muted-color: #9ca3af; /* slate-400 */
+  --border-color: rgba(255, 255, 255, 0.12);
 }
 
-p h2{
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+/* Base text */
+.ck-render {
+  font-size: 1rem;
+  line-height: 1.75;
+  /* color: var(--text-color); */
+}
+.ck-render p {
+  margin: 0.75rem 0;
 }
 
-p h3{
-    font-size: 1.17rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+/* Headings */
+.ck-render h1,
+.ck-render h2,
+.ck-render h3,
+.ck-render h4,
+.ck-render h5,
+.ck-render h6 {
+  /* color: var(--text-color); */
+  margin: 1.25rem 0 0.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.ck-render h1 {
+  font-size: 2rem;
+}
+.ck-render h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.6);
+  padding-bottom: 0.25rem;
+}
+.ck-render h3 {
+  font-size: 1.25rem;
+  border-left: 4px solid rgba(59, 130, 246, 0.6);
+  padding-left: 0.5rem;
+}
+.ck-render h4 {
+  font-size: 1.125rem;
+}
+.ck-render h5 {
+  font-size: 1rem;
+}
+.ck-render h6 {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
 }
 
-p h4{
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+/* Lists */
+.ck-render ul,
+.ck-render ol {
+  margin: 0.5rem 1.25rem;
 }
 
-p img{
-    width: 20px;
-    display: inline;
+.ck-render ul li {
+  list-style-type: disc;
+}
+
+.ck-render ol li {
+  list-style-type: decimal;
+}
+
+.ck-render li {
+  margin: 0.25rem 0;
+}
+
+/* Quote */
+.ck-render blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid rgba(59, 130, 246, 0.5);
+  color: var(--muted-color);
+  background: rgba(59, 130, 246, 0.06);
+  border-radius: 6px;
+}
+
+/* Code */
+.ck-render pre {
+  background: #0f172a; /* slate-900 */
+  color: #e2e8f0; /* slate-200 */
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.ck-render code {
+  background: rgba(59, 130, 246, 0.1);
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
+}
+
+/* Links */
+.ck-render a {
+  color: #60a5fa; /* blue-400 for dark bg */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ck-render a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Images */
+.ck-render img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0.75rem auto;
+}
+
+/* Tables */
+.ck-render table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.ck-render th,
+.ck-render td {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+}
+
+/* Horizontal rule */
+.ck-render hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1.25rem 0;
 }

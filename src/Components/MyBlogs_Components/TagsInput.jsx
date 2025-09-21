@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 // Reusable tags input (YouTube-like)
 // Props:
@@ -20,6 +21,10 @@ const TagsInput = ({
     () => new Set(value.map((t) => t.toLowerCase())),
     [value]
   );
+
+  const { primaryColor, textColor } = useSelector(
+    (state) => state.color.colors
+  );  
 
   const addTags = (tags) => {
     if (!onChange) return;
@@ -89,7 +94,7 @@ const TagsInput = ({
             className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full"
             style={{
               backgroundColor: `${theme?.primaryColor || "#3b82f6"}1A`,
-              color: theme?.textColor || "#111827",
+              color: textColor,
               border: `1px solid ${theme?.primaryColor || "#3b82f6"}`,
             }}
           >
