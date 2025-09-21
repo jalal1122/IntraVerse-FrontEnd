@@ -10,6 +10,8 @@ import EditPost from "./MyBlogs_Components/EditPost";
 import { useDispatch } from "react-redux";
 import { getPostById } from "../features/Posts/postsSlice.js";
 import { useEffect, useState } from "react";
+import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import TermsOfService from "../Pages/TermsOfService";
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -80,6 +82,14 @@ const Router = () => {
 
         {/* Route for Editing Blog */}
         {user && <Route path="/edit-blog/:id" element={<EditPost />} />}
+
+        {/* Route for Privacy Policy */}
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+        {/* Route for Terms of Service */}
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
 
         {/* Redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" />} />
