@@ -40,6 +40,11 @@ const About = () => {
       <SEO
         title="About • Muhammad Uzair - IntraVerse"
         description="Meet Muhammad Uzair — crafting modern, human-centered web experiences with a love for performance, clarity, and creativity."
+        keywords="About Muhammad Uzair, Frontend Engineer, MERN Developer, UI Designer, Web Developer, IntraVerse"
+        url={window.location.href}
+        // image="https://intraverse.app/logo192.png"
+        type="website"
+        author="Muhammad Uzair"
       />
       <Header />
 

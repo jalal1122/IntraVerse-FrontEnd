@@ -32,11 +32,7 @@ const Post = ({ id }) => {
           .replace(/<[^>]+>/g, "")
           .substring(0, 150)
           .concat("...")}
-        keywords={post?.title
-          .replace(/<[^>]+>/g, "")
-          .split(" ")
-          .slice(0, 10)
-          .join(", ")}
+        keywords={post?.tags ? post.tags.join(", ") : "IntraVerse, Blog"}
         url={window.location.href}
         image={post?.image}
         type="article"
