@@ -14,12 +14,29 @@ const Comments = () => {
     dispatch(getPostComments(id));
   }, [dispatch, id]);
 
+  const borderColor =
+    localStorage.getItem("mode") === "light"
+      ? "rgba(255, 255, 255, 0.12)"
+      : "rgba(0, 0, 0, 0.12)";
+
   return (
-    <div className="w-full rounded-lg border border-white/10 overflow-hidden">
-      <div className="px-4 py-3 border-b border-white/10">
+    <div
+      className="w-full rounded-lg border  overflow-hidden"
+      style={{
+        borderColor: borderColor,
+      }}
+    >
+      <div
+        className="px-4 py-3 border-b"
+        style={{
+          borderColor: borderColor,
+        }}
+      >
         <h2 className="text-center font-bold text-xl md:text-2xl">Comments</h2>
       </div>
-      <div className="divide-y divide-white/10">
+      <div className="divide-y divide-white/10" style={{
+        borderColor: borderColor,
+      }}>
         {postsComments.map((comment) => (
           <div key={comment._id} className="px-4 py-3">
             <p className="font-semibold text-sm opacity-80">

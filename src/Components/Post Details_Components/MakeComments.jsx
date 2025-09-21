@@ -43,8 +43,24 @@ const MakeComments = () => {
     setFormData({ username: "", comment: "" });
   };
 
+  const borderColor =
+    localStorage.getItem("mode") === "light"
+      ? "rgba(255, 255, 255, 0.12)"
+      : "rgba(0, 0, 0, 0.12)";
+
+  const BgColor =
+    localStorage.getItem("mode") === "light"
+      ? "rgba(255, 255, 255, 0.05)"
+      : "#F3F8FE";
+
   return (
-    <div className="p-4 md:p-5 border border-white/10 rounded-lg flex flex-col gap-4 bg-white/5">
+    <div
+      className="p-4 md:p-5 border  rounded-lg flex flex-col gap-4"
+      style={{
+        borderColor: borderColor,
+        backgroundColor: BgColor,
+      }}
+    >
       <h2 className="text-center font-bold text-xl md:text-2xl">
         Add a Comment
       </h2>
@@ -60,18 +76,18 @@ const MakeComments = () => {
           onChange={handleChange}
           value={formData.username}
           placeholder="Your Name"
-          className="border border-white/10 bg-transparent p-2 rounded-md focus:outline-none focus:ring-2"
-          style={{ outlineColor: primaryColor }}
+          className="border bg-transparent p-2 rounded-md focus:outline-none focus:ring-2"
+          style={{ outlineColor: primaryColor, borderColor: borderColor }}
         />
         <textarea
-          className="w-full border border-white/10 bg-transparent p-2 rounded-md focus:outline-none focus:ring-2"
+          className="w-full border bg-transparent p-2 rounded-md focus:outline-none focus:ring-2"
           name="comment"
           value={formData.comment}
           onChange={handleChange}
           id="comment"
           rows="4"
           placeholder="Write your comment..."
-          style={{ outlineColor: primaryColor }}
+          style={{ outlineColor: primaryColor, borderColor: borderColor }}
         ></textarea>
         <button
           className="mt-2 text-white font-semibold px-6 py-2 rounded-md w-fit self-center hover:opacity-90"
