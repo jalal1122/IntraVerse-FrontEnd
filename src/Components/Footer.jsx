@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
 import blogCategories from "../utils/blogCategories";
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
 const Pill = ({ children, primaryColor }) => (
   <span
@@ -53,22 +54,66 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm font-semibold">
-              <Link to="/" className="hover:opacity-90">
-                Home
-              </Link>
-              <Link to="/about" className="hover:opacity-90">
-                About
-              </Link>
-              <Link to="/contact" className="hover:opacity-90">
-                Contact
-              </Link>
-              <Link to="/privacy-policy" className="hover:opacity-90">
-                Privacy
-              </Link>
-              <Link to="/terms-of-service" className="hover:opacity-90">
-                Terms
-              </Link>
+            <div className="flex flex-col items-start md:items-end gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm font-semibold">
+                <Link to="/" className="hover:opacity-90">
+                  Home
+                </Link>
+                <Link to="/about" className="hover:opacity-90">
+                  About
+                </Link>
+                <Link to="/contact" className="hover:opacity-90">
+                  Contact
+                </Link>
+                <Link to="/privacy-policy" className="hover:opacity-90">
+                  Privacy
+                </Link>
+                <Link to="/terms-of-service" className="hover:opacity-90">
+                  Terms
+                </Link>
+              </div>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/jalal1122"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="p-1.5 rounded-md transition-transform hover:scale-110 hover:opacity-90"
+                  style={{ color: textColor }}
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href="https://linkedin.com/mjdevstudio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="p-1.5 rounded-md transition-transform hover:scale-110 hover:opacity-90"
+                  style={{ color: textColor }}
+                >
+                  <FaLinkedin size={20} />
+                </a>
+                <a
+                  href="https://facebook.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="p-1.5 rounded-md transition-transform hover:scale-110 hover:opacity-90"
+                  style={{ color: textColor }}
+                >
+                  <FaFacebook size={20} />
+                </a>
+                <a
+                  href="https://instagram.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="p-1.5 rounded-md transition-transform hover:scale-110 hover:opacity-90"
+                  style={{ color: textColor }}
+                >
+                  <FaInstagram size={20} />
+                </a>
+              </div>
             </div>
           </div>
 
