@@ -137,6 +137,11 @@ const Contact = () => {
       <SEO
         title="Contact • IntraVerse"
         description="Say hello! Send a message to collaborate, share ideas, or give feedback."
+        keywords="Contact Muhammad Uzair, Contact IntraVerse, Collaborate with Muhammad Uzair, Feedback for IntraVerse"
+        url={window.location.href}
+        // image="https://intraverse.app/logo192.png"
+        type="website"
+        author="Muhammad Uzair"
       />
       <Header />
 

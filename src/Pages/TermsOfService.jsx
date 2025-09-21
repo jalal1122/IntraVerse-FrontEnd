@@ -30,6 +30,11 @@ const TermsOfService = () => {
       <SEO
         title="Terms of Service - IntraVerse"
         description="The rules for using IntraVerse: viewing posts and submitting anonymous comments."
+        keywords="Terms of Service, User Agreement, IntraVerse"
+        url={window.location.href}
+        // image="https://intraverse.app/logo192.png"
+        type="website"
+        author="Muhammad Uzair"
       />
       <Header />
 

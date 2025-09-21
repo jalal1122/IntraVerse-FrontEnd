@@ -16,6 +16,10 @@ const Dashboard = () => {
         title="IntraVerse - Dashboard"
         description="Welcome to IntraVerse, your go-to platform for the latest articles and insights. Explore trending and popular posts, and stay updated with the newest content."
         keywords="IntraVerse, articles, trending posts, popular posts, latest insights, blog, news"
+        url={window.location.href}
+        // image="https://intraverse.app/logo192.png"
+        type="website"
+        author="Muhammad Uzair"
       />
       <Header />
       <div

@@ -32,6 +32,11 @@ const PrivacyPolicy = () => {
       <SEO
         title="Privacy Policy - IntraVerse"
         description="Our commitment to your privacy and how we handle your data."
+        keywords="Privacy Policy, Data Protection, User Privacy, IntraVerse"
+        url={window.location.href}
+        // image="https://intraverse.app/logo192.png"
+        type="website"
+        author="Muhammad Uzair"
       />
       <Header />
 
