@@ -4,6 +4,7 @@ import { getMode } from "./features/Colors/colorSlice.js";
 import { useEffect } from "react";
 import Router from "./Components/Router.jsx";
 import { HeadProvider } from "react-head";
+import Footer from "./Components/Footer";
 
 function App() {
   // Initialize Redux dispatch and selectors
@@ -31,6 +32,7 @@ function App() {
     <>
       <HeadProvider>
         <Router />
+        <Footer />
       </HeadProvider>
     </>
   );
