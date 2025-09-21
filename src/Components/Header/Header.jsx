@@ -82,6 +82,19 @@ const Header = () => {
                   ></span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="relative transition-colors"
+                  style={{ color: textColor }}
+                >
+                  About
+                  <span
+                    className="block h-0.5 scale-x-0 transition-transform origin-left"
+                    style={{ backgroundColor: primaryColor }}
+                  ></span>
+                </Link>
+              </li>
             </ul>
 
             {/* Search */}
@@ -152,6 +165,16 @@ const Header = () => {
                     style={{ color: "white" }}
                   >
                     MyBlogs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/about"
+                    onClick={() => setOpen(false)}
+                    className="block px-2 py-2 rounded transition-colors"
+                    style={{ color: "white" }}
+                  >
+                    About
                   </Link>
                 </li>
               </ul>

@@ -12,6 +12,7 @@ import { getPostById } from "../features/Posts/postsSlice.js";
 import { useEffect, useState } from "react";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import TermsOfService from "../Pages/TermsOfService";
+import About from "../Pages/About";
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,9 @@ const Router = () => {
         {/* Route for Terms of Service */}
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
+
+        {/* Route for About */}
+        <Route path="/about" element={<About />} />
 
         {/* Redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" />} />
