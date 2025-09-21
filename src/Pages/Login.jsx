@@ -41,6 +41,7 @@ const Login = () => {
     // Set error message if there is an error
     if (loginIsError) {
       setErrorMessage(loginMessage);
+      return
     }
 
     // If login is successful or user is already logged in, navigate to dashboard
@@ -52,6 +53,7 @@ const Login = () => {
 
       // Navigate to dashboard or home page after successful login
       navigate("/");
+      return
     }
 
     // reset the user State
@@ -61,7 +63,7 @@ const Login = () => {
     return () => {
       setErrorMessage("");
     };
-  }, [loginIsError, loginIsSuccess, loginMessage, dispatch, user, navigate]);
+  }, [loginIsError, loginIsSuccess, loginMessage, user]);
 
   // Handle input changes
   const onchange = (e) => {
