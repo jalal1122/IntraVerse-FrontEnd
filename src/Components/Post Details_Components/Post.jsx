@@ -75,9 +75,16 @@ const Post = ({ id }) => {
 
         {/* Content */}
         <div className="prose prose-invert max-w-none text-[1.05rem] leading-relaxed">
-          <p
+          <div
             className="ck-render"
             dangerouslySetInnerHTML={{ __html: post?.content }}
+            style={{
+              "--border-color": `${
+                localStorage.getItem("mode") === "dark"
+                  ? "rgba(0, 0, 0, 0.12)"
+                  : "rgba(255, 255, 255, 0.12)"
+              }`,
+            }}
           />
         </div>
       </div>
