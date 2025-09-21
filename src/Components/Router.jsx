@@ -9,10 +9,17 @@ import CreatePost from "../Components/MyBlogs_Components/CreatePost";
 import EditPost from "./MyBlogs_Components/EditPost";
 import { useDispatch } from "react-redux";
 import { getPostById } from "../features/Posts/postsSlice.js";
+import { useEffect, useState } from "react";
 
 const Router = () => {
   const dispatch = useDispatch();
-  const user = document.cookie.includes("user=");
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const user = document.cookie.includes("user=");
+    setUser(user);
+  }, [user]);
   return (
     <>
       <Routes>
