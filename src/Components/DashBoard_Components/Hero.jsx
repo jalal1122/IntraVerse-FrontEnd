@@ -5,6 +5,7 @@ import {
 } from "../../features/Posts/postsSlice.js";
 import { useEffect } from "react";
 import Loader from "../Loader";
+import HeroImageFlash from "./HeroImageFlash";
 import { Link } from "react-router";
 
 const Hero = () => {
@@ -25,12 +26,15 @@ const Hero = () => {
     if (trendingPostsIsSuccess) {
       dispatch(trendingPostsReset());
     }
+  }, [dispatch, trendingPostsIsSuccess]);
 
+  useEffect(() => {
     dispatch(getTrendingPosts());
   }, [dispatch]);
 
   if (trendingPostsIsLoading) {
-    return <Loader />;
+    // Show white flashing alt image (YouTube style)
+    return <HeroImageFlash />;
   }
 
   if (trendingPostsIsError) {
@@ -39,7 +43,7 @@ const Hero = () => {
 
   return (
     <>
-      {trendingPosts[0] && (
+      {trendingPosts[0] ? (
         <div className="w-full h-[240px] sm:h-[320px] md:h-[420px] rounded-xl relative overflow-hidden group">
           <Link to={`/post/${trendingPosts[0]._id}`}>
             <img
@@ -68,6 +72,8 @@ const Hero = () => {
             </p>
           </div>
         </div>
+      ) : (
+        <HeroImageFlash />
       )}
     </>
   );

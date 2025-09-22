@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts, postsReset } from "../../features/Posts/postsSlice.js";
 import { useEffect, useState } from "react";
 import SidePost from "../SidePost";
-import Loader from "../Loader";
 import MainPost from "../MainPost.jsx";
+import SidePostSkeleton from "../SidePostSkeleton";
+import MainPostSkeleton from "../MainPostSkeleton";
 
 const NewestPosts = () => {
   const dispatch = useDispatch();
@@ -20,15 +21,17 @@ const NewestPosts = () => {
   const [eightPost, setEightPost] = useState(null);
 
   useEffect(() => {
+    if (postsIsSuccess) {
+      dispatch(postsReset());
+    }
+  }, [dispatch, postsIsSuccess]);
+
+  useEffect(() => {
     if (posts.length > 0) {
       setFirstPost(posts[0]);
       setFirstLinePostGroup(posts.slice(1, 4));
       setSecondLinePostGroup(posts.slice(4, 7));
       setEightPost(posts[7]);
-    }
-
-    if (postsIsSuccess) {
-      dispatch(postsReset());
     }
 
     dispatch(getAllPosts());
@@ -39,7 +42,22 @@ const NewestPosts = () => {
       <h2 className="text-xl font-bold mb-4 text-center hover:underline underline-offset-8">
         Newest Posts
       </h2>
-      {postsIsLoading && <Loader />}
+      {postsIsLoading && (
+        <div className="flex justify-between p-2 gap-4 md:gap-5 flex-wrap">
+          <MainPostSkeleton />
+          <div className="flex flex-col gap-4 w-full md:w-[48%]">
+            {[0, 1, 2].map((i) => (
+              <SidePostSkeleton key={`fpsk-${i}`} />
+            ))}
+          </div>
+          <div className="flex flex-col gap-4 w-full md:w-[48%]">
+            {[0, 1, 2].map((i) => (
+              <SidePostSkeleton key={`spsk-${i}`} />
+            ))}
+          </div>
+          <MainPostSkeleton />
+        </div>
+      )}
       {postsIsError && <p>Error: {postsIsError}</p>}
 
       {!postsIsLoading && !postsIsError && posts.length > 0 && (

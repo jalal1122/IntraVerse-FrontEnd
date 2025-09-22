@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import SideThumbFlash from "./SideThumbFlash";
 
 const SidePost = ({ post }) => {
   return (
@@ -8,11 +9,15 @@ const SidePost = ({ post }) => {
     >
       <Link to={`/post/${post._id}`}>
         <div className="w-28 h-20 sm:w-32 sm:h-24 rounded overflow-hidden">
-          <img
-            src={post?.image}
-            alt={post?.title}
-            className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300 hover:cursor-pointer"
-          />
+          {post?.image ? (
+            <img
+              src={post?.image}
+              alt={post?.title}
+              className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300 hover:cursor-pointer"
+            />
+          ) : (
+            <SideThumbFlash />
+          )}
         </div>
       </Link>
       <div className="w-full">
