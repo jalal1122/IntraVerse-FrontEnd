@@ -6,21 +6,21 @@ const MainPost = ({ post }) => {
       <Link to={`/post/${post._id}`}>
         <div className="w-full overflow-hidden rounded-lg">
           <img
-            src={post.image}
-            alt={post.title}
+            src={post?.image}
+            alt={post?.title}
             className="w-full h-auto max-h-60 object-cover hover:scale-105 transition-transform duration-300 hover:cursor-pointer"
           />
         </div>
       </Link>
       <Link to={`/post/${post._id}`}>
         <h3
-          title={post.title}
+          title={post?.title}
           className="text-base sm:text-lg font-semibold mb-1 hover:underline underline-offset-4"
         >
-          {post.title}
+          {post?.title}
         </h3>
       </Link>
-      <h4 className="text-sm opacity-80">{post.createdAt.split("T")[0]}</h4>
+      <h4 className="text-sm opacity-80">{post?.createdAt.split("T")[0]}</h4>
     </div>
   );
 };
