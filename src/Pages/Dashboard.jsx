@@ -13,7 +13,7 @@ const Dashboard = () => {
   return (
     <>
       <SEO
-        title="IntraVerse - Dashboard"
+        title="IntraVerse"
         description="Welcome to IntraVerse, your go-to platform for the latest articles and insights. Explore trending and popular posts, and stay updated with the newest content."
         keywords="IntraVerse, articles, trending posts, popular posts, latest insights, blog, news"
         url={window.location.href}
