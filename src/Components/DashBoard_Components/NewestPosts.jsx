@@ -26,6 +26,12 @@ const NewestPosts = () => {
     }
   }, [dispatch, postsIsSuccess]);
 
+  // Fetch once on mount
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, [dispatch]);
+
+  // Derive local groups when posts change
   useEffect(() => {
     if (posts.length > 0) {
       setFirstPost(posts[0]);
@@ -33,9 +39,7 @@ const NewestPosts = () => {
       setSecondLinePostGroup(posts.slice(4, 7));
       setEightPost(posts[7]);
     }
-
-    dispatch(getAllPosts());
-  }, [dispatch, posts]);
+  }, [posts]);
 
   return (
     <div>

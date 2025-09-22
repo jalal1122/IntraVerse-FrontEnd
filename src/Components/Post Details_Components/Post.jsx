@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../../features/Posts/postsSlice.js";
-import Loader from "../Loader";
 import { useEffect } from "react";
 import SEO from "../SEO";
 import "./content.css";
+import PostDetailSkeleton from "./PostDetailSkeleton";
 
 const Post = ({ id }) => {
   const { primaryColor } = useSelector((state) => state.color.colors);
@@ -18,7 +18,7 @@ const Post = ({ id }) => {
   }, [dispatch, id]);
 
   if (postIsLoading) {
-    return <Loader />;
+    return <PostDetailSkeleton />;
   }
 
   if (postIsError) {
