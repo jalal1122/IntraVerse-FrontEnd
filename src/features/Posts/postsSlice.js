@@ -202,17 +202,17 @@ const postsSlice = createSlice({
       // get all posts
       ////////////
       .addCase(getAllPosts.pending, (state) => {
-        state.isLoading = true;
+        state.postsIsLoading = true;
       })
       .addCase(getAllPosts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isError = null;
-        state.isSuccess = true;
+        state.postsIsLoading = false;
+        state.postsIsError = null;
+        state.postsIsSuccess = true;
         state.posts = action.payload;
       })
       .addCase(getAllPosts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload;
+        state.postsIsLoading = false;
+        state.postsIsError = action.payload;
       })
 
       /////////////
