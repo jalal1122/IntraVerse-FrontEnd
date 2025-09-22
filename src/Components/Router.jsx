@@ -7,9 +7,8 @@ import { Navigate } from "react-router";
 import MyBlogs from "../Pages/MyBlogs";
 import CreatePost from "../Components/MyBlogs_Components/CreatePost";
 import EditPost from "./MyBlogs_Components/EditPost";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../features/Posts/postsSlice.js";
-import { useEffect, useState } from "react";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import TermsOfService from "../Pages/TermsOfService";
 import About from "../Pages/About";
@@ -18,12 +17,8 @@ import Contact from "../Pages/Contact";
 const Router = () => {
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const user = document.cookie.includes("user=");
-    setUser(user);
-  }, [user]);
+  const { user } = useSelector((state) => state.user);
+  
   return (
     <>
       <Routes>
