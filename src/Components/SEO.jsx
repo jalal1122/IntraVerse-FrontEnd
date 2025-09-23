@@ -6,7 +6,7 @@ export default function SEO({
   keywords,
   url,
   image,
-  type = "website", // "website" for pages, "article" for blog posts
+  type = url.includes("post/") ? "article" : "website", // "website" for pages, "article" for blog posts
   author = "IntraVerse", // default author
   datePublished,
   dateModified,
@@ -30,7 +30,7 @@ export default function SEO({
             name: siteName,
             logo: {
               "@type": "ImageObject",
-              url: "https://intraaverse.netlify.app/favicon.ico",
+              url: "https://intraverse.me/favicon.ico",
             },
           },
           datePublished: datePublished,
@@ -50,7 +50,7 @@ export default function SEO({
         rel="alternate"
         type="application/rss+xml"
         title="IntraVerse Blog RSS Feed"
-        href="https://intraaverse.netlify.app/rss.xml"
+        href="https://intraverse.me/rss.xml"
       />
 
       {/* Basic */}
