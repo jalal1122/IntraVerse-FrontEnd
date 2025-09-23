@@ -42,6 +42,8 @@ export default function SEO({
         }
       : null;
 
+  const postUrl = "https://intraverse.me/post/" + title.slice(0, 20);
+
   return (
     <>
       <link
@@ -55,7 +57,9 @@ export default function SEO({
       {title && <Title>{title}</Title>}
       {description && <Meta name="description" content={description} />}
       {keywords && <Meta name="keywords" content={keywords} />}
-      {url && <link rel="canonical" href={url} />}
+      {url && (
+        <link rel="canonical" href={url.includes("post/") ? postUrl : url} />
+      )}
       {/* Open Graph */}
       {title && <Meta property="og:title" content={title} />}
       {description && <Meta property="og:description" content={description} />}
