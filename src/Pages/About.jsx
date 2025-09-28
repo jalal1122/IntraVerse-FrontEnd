@@ -225,6 +225,7 @@ const About = () => {
               </p>
               <a
                 href="mailto:jk4350649@gmail.com?subject=Hello%20Muhammad%20Uzair"
+                rel="nofollow"
                 className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg font-semibold"
                 style={{ backgroundColor: primaryColor, color: "white" }}
               >
