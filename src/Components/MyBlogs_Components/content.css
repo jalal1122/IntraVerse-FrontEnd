@@ -163,7 +163,8 @@
 
 /* Links */
 .ckEditor .ck-content a {
-  color: #2563eb; /* blue-600 */
+  /* color: #2563eb; blue-600 */
+  color: #3b82f6;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
