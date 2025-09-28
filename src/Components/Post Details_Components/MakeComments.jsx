@@ -75,6 +75,7 @@ const MakeComments = () => {
           id="username"
           onChange={handleChange}
           value={formData.username}
+          autoComplete="off"
           placeholder="Your Name"
           className="border bg-transparent p-2 rounded-md focus:outline-none focus:ring-2"
           style={{ outlineColor: primaryColor, borderColor: borderColor }}
@@ -84,6 +85,7 @@ const MakeComments = () => {
           name="comment"
           value={formData.comment}
           onChange={handleChange}
+          autoComplete="off"
           id="comment"
           rows="4"
           placeholder="Write your comment..."
