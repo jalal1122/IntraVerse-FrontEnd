@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService.js";
 
-const user = localStorage.getItem("user")
+const user = document.cookie.includes("user=")
   ? JSON.parse(
-      document.cookie.includes("user=")
-        ? decodeURIComponent(document.cookie.split("user=")[1].split(";")[0])
-        : localStorage.getItem("user")
+      decodeURIComponent(document.cookie.split("user=")[1].split(";")[0])
     )
   : null;
 
