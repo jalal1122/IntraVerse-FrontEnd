@@ -15,7 +15,7 @@ const MyBlogs = () => {
   const { textColor, primaryColor } = useSelector(
     (state) => state.color.colors
   );
-
+  
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -37,7 +37,6 @@ const MyBlogs = () => {
     if (refreshTrendingPostsSuccess) {
       dispatch(getTrendingPosts());
       dispatch(resetRefreshTrendingPosts());
-      navigate("/");
     }
   }, [refreshTrendingPostsSuccess]);
 
