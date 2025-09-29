@@ -27,6 +27,11 @@
   display: inline;
 }
 
+.ckEditor figure>img{
+  width: 100%;
+  display: inline;
+}
+
 /* --- Enhancements: themeable toolbar, editable area, and content --- */
 .ckEditor {
   /* These are defaults. BlogEditor injects values via inline style. */
