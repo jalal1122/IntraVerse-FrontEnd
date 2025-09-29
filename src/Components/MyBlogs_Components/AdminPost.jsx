@@ -108,7 +108,7 @@ const AdminPost = ({ post, primaryColor }) => {
     >
       <div className="relative">
         <img
-          src={post.image}
+          src={post?.image}
           alt={post.title}
           className="h-44 w-full object-cover"
         />

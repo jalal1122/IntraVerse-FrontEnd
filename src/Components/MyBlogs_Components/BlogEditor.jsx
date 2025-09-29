@@ -1,6 +1,8 @@
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./content.css";
+import CloudinaryUploadAdapterPlugin from "../../utils/cloudinaryUploadAdapter";
+import { useState } from "react";
 
 // BlogEditor wraps CKEditor 5 and exposes a simple API. You can theme it
 // by passing theme={{ primaryColor, textColor }} and customize the placeholder.
@@ -10,6 +12,8 @@ const BlogEditor = ({
   placeholder = "Write your post...",
   theme,
 }) => {
+  const [uploadError, setUploadError] = useState("");
+
   const handleSave = (data) => {
     if (onSave) onSave(data);
   };
@@ -27,6 +31,33 @@ const BlogEditor = ({
         data={initialData || ""}
         config={{
           placeholder,
+          extraPlugins: [CloudinaryUploadAdapterPlugin],
+          toolbar: {
+            items: [
+              "heading",
+              "|",
+              "bold",
+              "italic",
+              "link",
+              "bulletedList",
+              "numberedList",
+              "blockQuote",
+              "|",
+              "imageUpload",
+              "undo",
+              "redo",
+            ],
+          },
+          image: {
+            toolbar: [
+              "imageStyle:inline",
+              "imageStyle:block",
+              "imageStyle:side",
+              "|",
+              "toggleImageCaption",
+              "linkImage",
+            ],
+          },
         }}
         onReady={(editor) => {
           try {
@@ -37,13 +68,20 @@ const BlogEditor = ({
               el.style.overflowY = "auto";
             }
           } catch {
-            // no-op: ensure no runtime impact
+            // no-op
           }
         }}
         onChange={(_, editor) => {
           handleSave(editor.getData());
         }}
+        onError={(evt, { willEditorRestart }) => {
+          if (willEditorRestart) return;
+          setUploadError("Editor error – check console.");
+        }}
       />
+      {uploadError && (
+        <p className="mt-2 text-xs text-red-500">{uploadError}</p>
+      )}
     </div>
   );
 };

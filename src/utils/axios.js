@@ -14,7 +14,7 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-
+    error.timeout = 3000;
     // If the error is due to an expired token, attempt to refresh it
     if (
       error.response &&

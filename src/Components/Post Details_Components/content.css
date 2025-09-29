@@ -118,6 +118,17 @@
   height: auto;
   border-radius: 8px;
   margin: 0.75rem auto;
+
+}
+
+.ck-render img {
+  width: 20px;
+  display: inline;
+}
+
+.ck-render figure>img{
+  width: 100%;
+  display: inline;
 }
 
 /* Tables */
