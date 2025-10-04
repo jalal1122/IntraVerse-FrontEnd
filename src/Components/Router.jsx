@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router";
 // import Register from "../Pages/Register.jsx";
+import { Routes, Route } from "react-router";
 import Login from "../Pages/Login.jsx";
 import Dashboard from "../Pages/Dashboard.jsx";
 import PostDetails from "../Pages/PostDetails";
@@ -18,7 +18,15 @@ const Router = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
-  
+
+  const checkAuth = ({ children }) => {
+    if (!user) {
+      return <Navigate to="/" />;
+    }
+
+    return children;
+  };
+
   return (
     <>
       <Routes>
@@ -30,15 +38,6 @@ const Router = () => {
             </>
           }
         />
-
-        {/* <Route
-          path="/register"
-          element={
-            <>
-              <Register />
-            </>
-          }
-        /> */}
 
         <Route
           path="/login"
@@ -63,22 +62,22 @@ const Router = () => {
         />
 
         {/*Route for MyBlogs */}
-        {user && (
-          <Route
-            path="/my-blogs"
-            element={
-              <>
-                <MyBlogs />
-              </>
-            }
-          />
-        )}
+        <Route
+          path="/my-blogs"
+          element={checkAuth({ children: <MyBlogs /> })}
+        />
 
         {/* Route for Creating Blog */}
-        {user && <Route path="/create-blog" element={<CreatePost />} />}
+        <Route
+          path="/create-blog"
+          element={checkAuth({ children: <CreatePost /> })}
+        />
 
         {/* Route for Editing Blog */}
-        {user && <Route path="/edit-blog/:id" element={<EditPost />} />}
+        <Route
+          path="/edit-blog/:id"
+          element={checkAuth({ children: <EditPost /> })}
+        />
 
         {/* Route for Privacy Policy */}
         <Route path="/privacy" element={<PrivacyPolicy />} />
@@ -102,3 +101,14 @@ const Router = () => {
 };
 
 export default Router;
+
+{
+  /* <Route
+    path="/register"
+    element={
+      <>
+        <Register />
+      </>
+    }
+  /> */
+}
