@@ -17,7 +17,7 @@ export default function SEO({
   url, // full URL of the current page (preferred)
   canonicalUrl, // optional explicit canonical override
   slug, // optional slug to build canonical if url not passed
-  image,
+  image = "./banner.png",
   type, // "article" | "website" (auto-detected if not provided)
   author = "IntraVerse",
   datePublished,
