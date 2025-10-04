@@ -22,9 +22,9 @@ const MyBlogs = () => {
 
   const {
     adminPosts,
-    adminIsLoading,
-    adminIsSuccess,
-    adminIsError,
+    adminPostsLoading,
+    adminPostsSuccess,
+    adminPostsError,
     refreshTrendingPostsLoading,
     refreshTrendingPostsSuccess,
   } = useSelector((state) => state.admin);
@@ -40,7 +40,7 @@ const MyBlogs = () => {
     }
   }, [refreshTrendingPostsSuccess]);
 
-  if (adminIsLoading) {
+  if (adminPostsLoading) {
     return <Loader />;
   }
 
@@ -48,8 +48,8 @@ const MyBlogs = () => {
     <div>
       <Header />
 
-      {adminIsError && (
-        <h1 className="text-3xl font-bold text-center my-10">{adminIsError}</h1>
+      {adminPostsError && (
+        <h1 className="text-3xl font-bold text-center my-10">{adminPostsError}</h1>
       )}
 
       <div
@@ -86,7 +86,7 @@ const MyBlogs = () => {
             </button>
           </div>
         </div>
-        {adminIsSuccess && adminPosts.length === 0 ? (
+        {adminPostsSuccess && adminPosts.length === 0 ? (
           <h1 className="text-3xl font-bold text-center">No Blogs Found</h1>
         ) : (
           <div className="flex flex-wrap justify-center-safe items-center gap-3 p-2">
